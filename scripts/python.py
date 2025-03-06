@@ -65,3 +65,18 @@ import random
 
 random_number = lambda : random.randint(0,100)
 print("random number : " , random_number())
+
+
+
+# using private varible
+class Example:
+    def __init__(self):
+        self.__secret = "hey i am a secret"
+
+    def printt(self):
+        print(self.__secret)
+
+obj = Example()
+obj.printt
+print(obj._Example__secret)
+print(obj.__secret)  # raises arttribute error
