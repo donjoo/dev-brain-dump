@@ -63,7 +63,7 @@ class Cat:
 
 
 class Duck:
-    def hekk(slef):
+    def speak(slef):
         return "quack"
 
 
@@ -71,3 +71,19 @@ class Duck:
 print(make_it_speak(Dog()))
 print(make_it_speak(Cat()))
 print(make_it_speak(Duck()))
+
+
+
+
+
+
+
+
+
+def sum_n_recursion(n):
+    if n == 0:
+        return 0
+    return n + sum_n_recursion(n - 1)
+
+
+print(sum_n_recursion(10))
