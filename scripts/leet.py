@@ -87,3 +87,20 @@ def sum_n_recursion(n):
 
 
 print(sum_n_recursion(10))
+
+
+
+
+
+
+
+
+
+def fibonacci(limit):
+    a, b = 0, 1
+    while a < limit:
+        yield a
+        a, b = b, a + b
+
+result = list(fibonacci(50))
+print(result)  # Output: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
