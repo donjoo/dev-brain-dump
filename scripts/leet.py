@@ -94,6 +94,7 @@ print(sum_n_recursion(10))
 
 
 
+# fibonacii
 
 
 def fibonacci(limit):
@@ -104,3 +105,50 @@ def fibonacci(limit):
 
 result = list(fibonacci(50))
 print(result)  # Output: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+
+
+
+
+
+def fibonacci_iter(n):
+    if n <= 0:
+        return 0
+    elif n == 1:
+        return 1
+
+
+    a, b = 0,1
+    for _ in range(2, n + 1):
+        a, b = b ,  a + b
+
+    return b
+
+
+
+
+# factorial iterative
+
+def factorial_iterative(n):
+    result = 1
+    for i in range(2,n+1):
+        result *= i
+    return result
+
+
+
+def factorial_recursive(n):
+    if n == 0 or n == 1:
+        return 1
+    return n * factorial_recursive(n - 1)
+
+print(factorial_recursive(5))  # Output: 120
+
+
+
+
+
+
+#  is Prime?
+
+
+
