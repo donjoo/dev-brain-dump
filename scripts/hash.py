@@ -31,3 +31,18 @@ print(ht.get("age"))   # Output: 25
 
 ht.delete("name")
 print(ht.get("name"))  # Output: None
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
