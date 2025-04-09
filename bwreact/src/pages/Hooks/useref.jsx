@@ -42,6 +42,17 @@ function Timer() {
 
     const stopTimer = () => {
         clearInterval(intervalRef.current);
-    }
+        intervalRef.current = null;
+    };
+
+    return (
+        <div> 
+            <p> Seconds : {seconds}</p>
+            <button onClick={startTimer}>Start</button>
+            <button onClick={stopTimer}>Stop</button>
+        </div>
+    )
+
 }
 
+export default Timer;
