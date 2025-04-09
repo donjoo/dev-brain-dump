@@ -4,7 +4,7 @@ import Parent from "./pages/parent";
 import Counterr from "./pages/reducer";
 import Counter from "./pages/test";
 import TextInput from "./pages/TextInput";
-
+import TextInputWithFocusButton from "./pages/Hooks/useref";
 function App() {
  
 
@@ -14,7 +14,8 @@ function App() {
   <MyComponent></MyComponent> */}
   {/* <Memoss></Memoss> */}
   {/* <Parent></Parent> */}
-  <Counterr/>
+  {/* <Counterr/> */}
+  <TextInputWithFocusButton></TextInputWithFocusButton>
   </>
 }
  
