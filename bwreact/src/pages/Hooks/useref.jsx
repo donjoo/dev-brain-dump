@@ -33,6 +33,7 @@ function Timer() {
     const startTimer = () => {
         if (!intervalRef.current) {
             intervalRef.current = setInterval(() => {
+                console.log("Running");
                 setSeconds(prevSecondss => prevSecondss + 1);
             }, 1000);
 
