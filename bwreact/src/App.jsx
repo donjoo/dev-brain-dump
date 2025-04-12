@@ -7,6 +7,8 @@ import TextInput from "./pages/TextInput";
 import TextInputWithFocusButton from "./pages/Hooks/useref";
 import Appq from "./pages/Hooks/usememo";
 import ThemeContext from "./pages/context.jsx/Theme";
+import Child from "./pages/context.jsx/Child.jsx";
+import { useState } from "react";
 function App() {
   const [theme, setTheme] = useState('light')
 
@@ -20,7 +22,7 @@ function App() {
   {/* <TextInputWithFocusButton></TextInputWithFocusButton> */}
   <Appq/>
   <ThemeContext.Provider value={{theme,setTheme}} >
-    
+    <Child />
   </ThemeContext.Provider>
   </>
 }
