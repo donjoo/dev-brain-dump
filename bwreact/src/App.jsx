@@ -24,6 +24,7 @@ function App() {
   <ThemeContext.Provider value={{theme,setTheme}} >
     <Child />
   </ThemeContext.Provider>
+  <Counterr></Counterr>
   </>
 }
  

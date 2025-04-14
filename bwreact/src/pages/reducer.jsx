@@ -1,35 +1,48 @@
 import { useReducer } from "react";
+import {reducer, initialstate} from "./reduce";
 
 
-const initialState = {count : 0}
 
-function reducer(state,action) {
-    switch (action.type) {
-        case 'increment':
-            return {count: state.count + 1};
-        case 'decrement' :
-            return {count : state.count -1};
-        case 'reset':
-            return {count : 0}
-        default:
-            return state;
-    }
+// const initialstate = {count: 0}
 
-}
+
+
+// function reducer(state, action) {
+//     switch (action.type) {
+//         case 'INCREMENT':
+//             return {count : state.count + 1};
+//         case 'DECREMENT':
+//             return {count : state.count - 1};
+//         case 'RESET':
+//             return {count : 0}
+//         default:
+//             return state;
+
+//     }
+// }
+
+
+
+
+
 
 function Counterr() {
- const [state,dispatch] = useReducer(reducer,initialState)
-
- return (
-    <div>
-        <h1>Count: {state.count}</h1>
-        <button onClick={()=> dispatch({type: 'increment'})}>+</button>
-        <button onClick={() => dispatch({type:'decrement'})}>-</button>
-        <button onClick={() => dispatch({type : 'reset'})}>@</button>
-    </div>
- )
-}
+    const [state, dispatch] = useReducer(reducer,initialstate)
 
 
+    return (
+        <div>
+            <h2>Count: {state.count}</h2>
+            <button onClick={() => dispatch({type: 'INCREMENT'})}>+</button>
+            <button onClick={() => dispatch({type: 'DECREMENT'})}>-</button>
+            <button onClick={() => dispatch({type: "RESET"})}>reset</button>
+        </div>
 
-export default Counterr
+    );
+
+
+
+};
+
+
+export default Counterr;
