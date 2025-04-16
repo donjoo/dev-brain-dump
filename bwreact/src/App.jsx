@@ -9,6 +9,10 @@ import Appq from "./pages/Hooks/usememo";
 import ThemeContext from "./pages/context.jsx/Theme";
 import Child from "./pages/context.jsx/Child.jsx";
 import { useState } from "react";
+import CounterComponent from "./pages/Custom/Counter.jsx";
+import Appp from "./pages/Hooks/useTransaction.jsx";
+import Appk from "./pages/Hooks/useDefferedValue.jsx";
+import Appl from "./pages/Hooks/useDefferedValue.jsx";
 function App() {
   const [theme, setTheme] = useState('light')
 
@@ -20,11 +24,15 @@ function App() {
   {/* <Parent></Parent> */}
   {/* <Counterr/> */}
   {/* <TextInputWithFocusButton></TextInputWithFocusButton> */}
-  <Appq/>
+  {/* <Appq/>
   <ThemeContext.Provider value={{theme,setTheme}} >
     <Child />
   </ThemeContext.Provider>
-  <Counterr></Counterr>
+  <Counterr></Counterr> */}
+  {/* <CounterComponent /> */}
+  {/* <Appp /> */}
+  {/* <Appk /> */}
+  <Appl />
   </>
 }
  
