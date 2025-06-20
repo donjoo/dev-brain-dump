@@ -13,6 +13,8 @@ import CounterComponent from "./pages/Custom/Counter.jsx";
 import Appp from "./pages/Hooks/useTransaction.jsx";
 import Appk from "./pages/Hooks/useDefferedValue.jsx";
 import Appl from "./pages/Hooks/useDefferedValue.jsx";
+import NameInput from "./pages/Hooks/useId.jsx";
+import Paren from "./pages/Hooks/ImerativeHandle/imperative.jsx";
 function App() {
   const [theme, setTheme] = useState('light')
 
@@ -32,7 +34,9 @@ function App() {
   {/* <CounterComponent /> */}
   {/* <Appp /> */}
   {/* <Appk /> */}
-  <Appl />
+  {/* <Appl /> */}
+  {/* <NameInput /> */}
+  <Paren />
   </>
 }
  

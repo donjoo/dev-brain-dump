@@ -1,10 +1,5 @@
 import { useState, useTransition } from "react"
 
-
-
-
-
-
 const List = ({items}) => {
     return (
         <ul>
@@ -16,15 +11,12 @@ const List = ({items}) => {
 }
 
 
-
 const Appp = () => {
     const [input, setInput] = useState('');
     const [isPending,startTransition] = useTransition();
     const [filtered, setFiltered] = useState([]);
 
-
     const allItems = Array.from({length : 10000}, (_,i) => `{item ${i}}`);
-
 
 
     const handleChange = (e) => {

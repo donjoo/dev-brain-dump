@@ -27,3 +27,31 @@ function Appq(){
 
 
 export default Appq
+
+
+
+
+
+
+
+
+
+function expensive({number}) {
+  const [count,setCount] = useState(0);
+
+  const slowCalculation = (num) => {
+    console.log('Calculating....');
+    for (let i = 0; i< 1e9; i++){}
+    return num * 2;
+  };
+
+  const double = useMemo(() => slowCalculation(number),[number]);
+
+  return (
+    <div>
+      <p>Double: {double}</p>
+      <button onClick={() => setCount(count + 1)}>Re-render</button>
+      <p>render count : {count}</p>
+    </div>
+  );
+}

@@ -4,6 +4,34 @@ import React, {useRef, useState} from "react";
 
 
 
+
+function InputFocus() {
+    const inputRef = useRef(null)
+
+    const focusInput = () => {
+        inputRef.current.focus();
+    };
+
+
+
+    return (
+        <div>
+            <input  ref= {inputRef}/>
+            <button onClick={focusInput}>Focus Input</button>
+        </div>
+    );
+}
+
+
+
+
+
+
+
+
+
+
+
 // function TextInputWithFocusButton() {
 //     const inputEl = useRef(null);
 
@@ -57,3 +85,34 @@ function Timer() {
 }
 
 export default Timer;
+
+
+
+
+
+
+
+
+
+
+
+
+function Timerr() {
+    const [seconds , setseconds] = useState(0);
+    const intervalRef = useRef(null);
+
+    const startTimer = () => {
+        if (!intervalRef.current) {
+            intervalRef.current = setInterval(() => {
+                console.log('Running');
+                setseconds(prevSecondss => prevSecondss + 1)
+            },1000);
+        }
+    };
+
+
+    const stopTimer = () => {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+    }
+}

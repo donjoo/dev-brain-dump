@@ -16,8 +16,6 @@ const List = ({ items }) => {
 
 
 
-
-
 const Appl = () => {
     const [input, setInput] = useState('');
     const deferedInput = useDeferredValue(input);
@@ -28,7 +26,7 @@ const Appl = () => {
     const filteredItems = allitems.filter(item => 
         item.toLowerCase().includes(deferedInput.toLowerCase())
     );
-
+ 
 
 
     return (
