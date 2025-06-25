@@ -1,19 +1,42 @@
-import { useRef } from "react";
-import FancyInput from "./child";
 
 
-function Paren() {
-    const fancyInputRef = useRef();
+// This hook lets you control what methods or properties the parent gets access to through the ref.
 
-    return (
-        <div>
-            <FancyInput ref = {fancyInputRef} />
-            <button onClick={() => fancyInputRef.current.focus()}>
-                Focus the input
-            </button>
-        </div>
-    );
+// You use it inside a forwardRef component.
+
+
+
+import React, {forwardRef, useRef, useImperativeHandle} from 'react';
+
+
+const CustomImput = forwardRef((props, ref) => {
+  const inRef = useRef()
+
+  useImperativeHandle(ref, () => ({
+    focus: () => inRef.current.focus(),
+    clear: () => (inRef.current.value ='')
+  }));
+
+
+
+  
+  return <input ref = {inRef} {...props}/>;
+});
+
+
+
+
+
+function App() {
+  const inputRef = useRef()
+
+  return (
+    <>
+    <CustomImput ref = {inputRef} placeholder='heyy'/>
+      <button onClick={() => inputRef.current.focus()}>Focus Input </button>
+   <button onClick ={() => inputRef.current.clear()} >Clear</button>
+    </>
+  )
 }
 
-
-export default Paren
+export default App;
