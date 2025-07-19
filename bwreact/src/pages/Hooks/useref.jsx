@@ -103,7 +103,6 @@ function Timer() {
         }
     };
 
-
     const stopTimer = () => {
         clearInterval(intervalRef.current);
         intervalRef.current = null;
