@@ -1,0 +1,103 @@
+✅ What is WSGI and ASGI?
+🔹 WSGI = Web Server Gateway Interface
+🔹 ASGI = Asynchronous Server Gateway Interface
+
+These are interfaces between your Django app and the web server (like gunicorn, uvicorn, or daphne).
+
+They define how the server talks to your Django code
+
+
+
+✅ WSGI: (Classic Django, synchronous)
+
+    Introduced in PEP 333
+
+    Works with traditional web requests (GET, POST, etc.)
+
+    Cannot handle real-time communication
+
+    Most Django projects still use this for basic apps.
+
+Example server:
+
+gunicorn myproject.wsgi:application
+
+✅ ASGI: (Modern Django, async-ready)
+
+    Introduced in PEP 484
+
+    Can handle:
+
+        HTTP
+
+        WebSockets
+
+        Async views
+
+        Background tasks, chat apps, etc.
+
+    Fully supported in Django 3.0+
+
+Example server:
+
+uvicorn myproject.asgi:application
+
+✅ Summary Line (for viva):
+
+    WSGI is a standard interface for handling synchronous web requests, 
+    while ASGI is its modern, asynchronous counterpart that also supports 
+    real-time features like WebSockets. Django uses WSGI by default, but from 
+    version 3.0+, it supports ASGI for building async apps.
+
+
+
+Django runs on a WSGI (or ASGI) server like gunicorn, uvicorn, or the built-in runserver.
+
+1. runserver (Django's built-in server)
+
+    ✅ Used during development only.
+
+    Comes with Django:
+    You run it using
+
+    python manage.py runserver
+
+    🔥 Automatically reloads when code changes.
+
+    ❌ Not suitable for production — slow, lacks performance optimizations, no multi-threading or proper request handling under load.
+
+🚀 2. Gunicorn (Green Unicorn)
+
+    A production-grade WSGI server for Python web applications (like Django or Flask).
+
+    WSGI = Web Server Gateway Interface (standard for Python web apps).
+
+    Used to deploy Django apps in production.
+
+    Can be combined with Nginx for better performance and handling static files.
+
+Example:
+
+gunicorn myproject.wsgi:application
+
+    ✅ Robust, supports multiple worker processes.
+
+    ❌ Doesn’t support ASGI (no async support) — not ideal for WebSockets or async frameworks like FastAPI.
+
+⚡ 3. Uvicorn
+
+    A lightweight, lightning-fast ASGI server (Asynchronous Server Gateway Interface).
+
+    Designed for async frameworks like FastAPI, but also supports Django with ASGI config (since Django 3.0+).
+
+    Used to run apps that need async support like WebSockets, long polling, or background tasks.
+
+Example:
+
+uvicorn myproject.asgi:application
+
+    ✅ Super fast.
+
+    ✅ Supports both HTTP and WebSocket.
+
+    ✅ Ideal for FastAPI, Django Channels, etc.

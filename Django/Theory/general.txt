@@ -1,0 +1,118 @@
+✅ What is Django?
+
+Django is a high-level Python web framework that allows developers to build secure, scalable, and maintainable web applications quickly.
+
+It follows the Model-View-Template (MVT) architecture and promotes reusability, rapid development, and the "Don't Repeat Yourself" (DRY) principle.
+✅ Why use Django?
+
+Here are the key reasons:
+
+    Batteries Included
+
+        Comes with built-in features like authentication, ORM, admin panel, form handling, sessions, security, and more.
+
+        You don’t have to reinvent the wheel.
+
+    Security
+
+        Prevents common vulnerabilities: SQL injection, XSS, CSRF, clickjacking.
+
+        Comes with built-in protection and best practices.
+
+    Scalability
+
+        Used by large apps like Instagram and Pinterest.
+
+        Can handle high traffic when properly optimized.
+
+    Rapid Development
+
+        Helps build MVPs and full applications quickly.
+
+        Has powerful tools for building both simple and complex apps.
+
+    ORM (Object-Relational Mapping)
+
+        Easy interaction with the database using Python code instead of SQL.
+
+        Model = table, Field = column, Instance = row.
+
+    Admin Interface
+
+        Auto-generated and customizable admin panel to manage app data without writing custom UIs.
+
+    Mature Ecosystem
+
+        Strong community and a wide range of third-party packages.
+
+    Good Documentation
+
+        One of the best-documented frameworks, making it beginner-friendly.
+
+
+
+
+
+
+
+
+###### How Django handles a request-response cycle?
+
+Request → WSGI/ASGI → Middleware (Pre) → URL Dispatcher → View → Model/DB → Template → Middleware (Post) → Response
+
+“In Django, when a request comes in, it goes through the WSGI server, 
+middleware, and URL dispatcher. The matched view executes, interacts 
+with models if needed, then renders a template and sends back an HttpResponse.”
+
+
+
+
+✅ What is a Template Engine?
+
+A template engine is a system that combines HTML with dynamic data to produce final web pages.
+
+“A template engine lets us mix HTML with dynamic content using a special syntax. In Django, the template engine takes data from the view and renders it into HTML using placeholders, loops, and conditions.”
+
+
+
+
+
+
+
+“Function-based views are simple and easy to read, making them great for small features. 
+Class-based views offer structure and reusability, especially useful for large apps. 
+Django also provides generic CBVs for common patterns like list, create, and update.”
+
+
+Generic Class-Based Views in Django are pre-built views that handle common CRUD operations. 
+They reduce boilerplate code and promote DRY principles. You only need to configure the model,
+ template, and URL, and Django does the rest.”
+
+
+“Middleware in Django is a framework of hooks into the request and response processing. 
+It can modify requests before they reach the view and responses before they go to the browser. 
+It’s used for authentication, logging, security, session management, and more.”
+
+
+✅ What are Signals in Django?
+Signals are Django’s way of letting parts of the app “listen” for certain events and act 
+automatically when those events occur.
+    Think of them like: “When this happens, do that.”
+“Signals in Django are used to trigger actions when certain events occur, 
+like model saves or deletions. They help decouple components and are useful for 
+things like auto-creating profiles, sending notifications, or cleanup tasks.
+
+
+✅ What are Migrations in Django?
+
+Migrations are Django’s way of propagating model changes to the database — like 
+creating tables, adding columns, etc
+
+“makemigrations generates migration files based on model changes, and migrate applies 
+those changes to the database. This two-step process keeps database schema changes structured, 
+versioned, and trackable.”
+
+
+“A custom user model in Django gives you full control over user fields and login behavior. 
+We extend AbstractUser and set AUTH_USER_MODEL in settings. It's recommended to create 
+this at the beginning of a project.”

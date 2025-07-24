@@ -1,0 +1,19 @@
+🔐 What is Same-Origin Policy (SOP)?
+The Same-Origin Policy is a security rule enforced by web browsers 
+that prevents JavaScript running on one origin (domain) from accessing data on another origin.
+
+
+
+🌐 What is CORS?
+CORS is a browser security feature that allows a server to specify which origins (websites) are 
+allowed to access its resources (like APIs).
+It exists because of SOP (Same-Origin Policy), which blocks one origin from accessing another’s 
+data by default.
+CORS is the controlled relaxation of SOP.
+
+
+🛑 XSS — Cross-Site Scripting
+XSS is a type of security vulnerability where an attacker injects malicious JavaScript into a 
+website or web app.
+This code then runs in other users’ browsers, potentially stealing cookies, session tokens, or 
+even doing actions on behalf of the user.
