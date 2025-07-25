@@ -1,0 +1,320 @@
+
+🌐 What is HTTP?
+
+HTTP stands for HyperText Transfer Protocol.
+
+It is the protocol used by browsers and servers to communicate over the web.
+
+Think of it as the language they use to talk to each other — when you open a website 
+or send a form, your browser and the server are using HTTP to send and receive data.
+
+
+
+------------------------------------------------------
+
+
+
+📨 Common HTTP Methods
+✅ 1. GET
+
+    Used for: Fetching data from the server
+
+    Characteristics:
+
+        No body (data is sent via URL/query parameters)
+
+        Safe and idempotent (no data modification)
+
+    Example:
+
+    GET /products/
+
+✅ 2. POST
+
+    Used for: Sending data to the server to create a resource
+
+    Characteristics:
+
+        Data is sent in the request body
+
+        Not idempotent (same request may create multiple entries)
+
+    Example:
+
+    POST /users/
+    Body: {"name": "Don", "email": "don@example.com"}
+
+✅ 3. PUT
+
+    Used for: Completely replacing an existing resource
+
+    Characteristics:
+
+        Full update (all fields must be sent)
+
+        Idempotent (same request = same result)
+
+    Example:
+
+    PUT /users/5/
+    Body: {"name": "Don", "email": "new@example.com"}
+
+✅ 4. PATCH
+
+    Used for: Partially updating a resource
+
+    Characteristics:
+
+        Send only the fields to update
+
+        Not always idempotent
+
+    Example:
+
+    PATCH /users/5/
+    Body: {"email": "updated@example.com"}
+
+✅ 5. DELETE
+
+    Used for: Deleting a resource from the server
+
+    Characteristics:
+
+        Usually no body
+
+        Idempotent (deleting same resource again has no effect)
+
+    Example:
+
+    DELETE /users/5/
+
+✅ 6. HEAD
+
+    Used for: Like GET, but fetches only headers (no body)
+
+    Used for: Checking if a resource exists or metadata
+
+    Example:
+
+    HEAD /image.png
+
+✅ 7. OPTIONS
+
+    Used for: Getting supported HTTP methods for a resource
+
+    Often used by: Browsers for CORS preflight requests
+
+    Example:
+
+    OPTIONS /api/data/
+
+
+
+✅ Parts of an HTTP Request (Developer Focused)
+1. Request Line
+
+The first line of the request. It defines what the client wants to do.
+
+<HTTP_METHOD> <REQUEST_PATH> <HTTP_VERSION>
+
+Example:
+
+GET /api/users/42/ HTTP/1.1
+
+    GET → Method (GET, POST, PUT, DELETE, etc.)
+
+    /api/users/42/ → Resource path (URI)
+
+    HTTP/1.1 → Protocol version
+
+2. Headers
+
+Key-value pairs that provide metadata about the request.
+
+Example:
+
+Host: example.com
+Authorization: Bearer <jwt_token>
+Content-Type: application/json
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+
+    Authorization → Sends credentials (token/session ID)
+
+    Content-Type → Format of request body (application/json, multipart/form-data, etc.)
+
+    Cookie → Sends stored cookies to the server
+
+    Accept → What format the client wants in response (like application/json)
+
+3. Body (Optional)
+
+Used with methods like POST, PUT, PATCH to send actual data to the server.
+
+Example:
+
+{
+  "username": "donjo",
+  "password": "123456"
+}
+
+    Sent in raw format (usually JSON)
+
+    Headers must include Content-Type
+
+4. Query Parameters (Optional)
+
+Appended to the URL for filtering/sorting/pagination.
+
+Example:
+
+GET /api/users/?search=don&page=2
+
+In code:
+
+request.GET.get('search')
+
+5. Cookies (Optional)
+
+Sent via Cookie header. Used for session tracking, CSRF tokens, etc.
+
+Example:
+
+Cookie: sessionid=abc123; csrftoken=xyz456
+
+🧠 Cheat Table for Review
+Part	What It Is	Example
+Request Line	Method + URL + HTTP Version	GET /api/users/ HTTP/1.1
+Headers	Meta info (auth, content-type)	Authorization: Bearer <token>
+Body	Payload (POST/PUT/PATCH)	{"name": "Don"}
+Query Params	Extra data in URL	?page=1&search=don
+Cookies	Stored client-side values	Cookie: sessionid=xyz
+
+If you’re explaining in an interview/viva:
+
+🗣️ “An HTTP request has a request line that defines the action, headers that 
+carry metadata like authentication and content type, a body if the method sends 
+data, and optional query parameters and cookies. In frontend apps like React, 
+axios or fetch handles this under the hood, and in DRF, we can access it using 
+request.method, request.data, request.headers, etc.”
+
+
+This is the raw HTTP request that gets sent:
+POST /login HTTP/1.1
+Host: api.example.com
+Content-Type: application/json
+Accept: application/json
+User-Agent: axios/1.6.0
+Content-Length: 44
+
+{
+  "username": "donjo",
+  "password": "123456"
+}
+
+---------------------------
+
+
+ HTTP Response Example
+If login is successful, the response might be:
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+Set-Cookie: sessionid=abc123; Path=/; HttpOnly; Secure
+Content-Length: 123
+
+{
+  "message": "Login successful",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "id": 1,
+    "username": "donjo"
+  }
+}
+
+🧩 Parts of the HTTP Response:
+Part	Example	Description
+Status Line	HTTP/1.1 200 OK	Protocol + status code + status message
+Headers	Content-Type, Set-Cookie, etc.	Metadata about the response
+Body	JSON response {...}	Actual data/content sent by server
+
+
+
+
+
+
+
+
+
+
+✅ 1xx – Informational
+
+These mean: “I received your request, still processing.”
+Code	Meaning	Example Use Case
+100	Continue	Browser sends more request body
+101	Switching Protocols	WebSockets upgrade request
+✅ 2xx – Success
+
+These mean: “Your request was successfully received, understood, and accepted.”
+Code	Meaning	Example Use Case
+200	OK	GET or POST successful
+201	Created	Resource created (e.g., new user signup)
+202	Accepted	Async request accepted, not completed
+204	No Content	Successful, but no body (e.g., DELETE)
+❗ 3xx – Redirection
+
+These mean: “You need to do something else to complete the request.”
+Code	Meaning	Example Use Case
+301	Moved Permanently	Resource has a new permanent URL
+302	Found (Temporary)	Temporary redirect (used often in auth)
+304	Not Modified	Cached response still valid
+❌ 4xx – Client Error
+
+These mean: “There was something wrong with your request.”
+Code	Meaning	Example Use Case
+400	Bad Request	Missing/invalid data in body/params
+401	Unauthorized	No/invalid authentication
+403	Forbidden	Authenticated but not allowed
+404	Not Found	Resource doesn’t exist
+405	Method Not Allowed	Using wrong HTTP method (e.g., PUT on GET)
+409	Conflict	Duplicate resource (e.g., email already used)
+🔥 5xx – Server Error
+
+These mean: “The server messed up.”
+Code	Meaning	Example Use Case
+500	Internal Server Error	Code error on server
+502	Bad Gateway	Invalid response from upstream server
+503	Service Unavailable	Server down or overloaded
+504	Gateway Timeout	Timeout from upstream server
+
+
+
+
+
+
+
+
+
+🔍 What are Query Parameters in HTTP?
+
+Query parameters (also called query strings) are key-value pairs added to the end of a URL to pass data to the server (usually during a GET request).
+💡 Format:
+
+https://example.com/api/users?age=20&active=true
+
+✅ Use Cases:
+
+    Filtering
+
+    Sorting
+
+    Pagination
+
+    Searching
+
+    🛠 Query Params in Django:
+
+
+In Django views, you can access query parameters like this:
+def get(self, request):
+category = request.GET.get('category')
+price = request.GET.get('price_lt')
