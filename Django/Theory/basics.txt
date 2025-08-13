@@ -392,3 +392,9 @@ It helps the server know:
     Which OS you're on (Windows, macOS, Linux, Android)
 
     Whether it’s a bot (like Googlebot) or mobile device
+
+🛠️ In Django, how to access the User Agent:
+
+def my_view(request):
+    user_agent = request.META.get('HTTP_USER_AGENT')
+    return HttpResponse(f"Your browser is: {user_agent}")
