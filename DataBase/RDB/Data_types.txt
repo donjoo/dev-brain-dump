@@ -1,0 +1,79 @@
+1. Numeric Data Types
+
+Used for storing numbers.
+
+
+| Data Type                           | Description                                                          | Example                   |
+| ----------------------------------- | -------------------------------------------------------------------- | ------------------------- |
+| **INT / INTEGER**                   | Whole numbers (no decimals).                                         | `42`                      |
+| **SMALLINT**                        | Smaller range of integers.                                           | `120`                     |
+| **BIGINT**                          | Large integers.                                                      | `9000000000`              |
+| **DECIMAL(p,s)** / **NUMERIC(p,s)** | Fixed-point decimal, `p` = total digits, `s` = digits after decimal. | `DECIMAL(5,2)` → `123.45` |
+| **FLOAT / REAL**                    | Approximate decimal (floating point).                                | `3.14159`                 |
+| **DOUBLE PRECISION**                | Higher precision floating point.                                     | `1.23456789`              |
+
+
+
+
+
+
+
+2. String Data Types
+
+Used for text storage.
+
+        | Data Type      | Description                                        | Example                       |
+| -------------- | -------------------------------------------------- | ----------------------------- |
+| **CHAR(n)**    | Fixed-length string (pads with spaces if shorter). | `'ABC'` (CHAR(5) → `"ABC  "`) |
+| **VARCHAR(n)** | Variable-length string, up to `n` characters.      | `'Hello'`                     |
+| **TEXT**       | Large text data, no fixed limit (depends on DBMS). | `'Long description...'`       |
+
+
+Use VARCHAR when you know the maximum size and want indexing; use TEXT for very large,
+ unstructured text where indexing isn’t always required.
+
+
+3. Date & Time Data Types
+
+Used for temporal values.
+
+    | Data Type                    | Description         | Example                 |
+| ---------------------------- | ------------------- | ----------------------- |
+| **DATE**                     | Stores date only.   | `'2025-08-13'`          |
+| **TIME**                     | Stores time only.   | `'14:35:00'`            |
+| **DATETIME** / **TIMESTAMP** | Stores date & time. | `'2025-08-13 14:35:00'` |
+| **YEAR**                     | Stores a year.      | `2025`                  |
+
+
+
+
+
+4. Boolean Data Types
+
+Used for true/false values.
+| Data Type              | Description                                                        | Example |
+| ---------------------- | ------------------------------------------------------------------ | ------- |
+| **BOOLEAN** / **BOOL** | Stores `TRUE` or `FALSE` (often stored as `1` and `0` internally). | `TRUE`  |
+
+
+
+
+
+5. Binary Data Types
+
+Used for raw binary data like images or files.
+| Data Type        | Description                  | Example                      |
+| ---------------- | ---------------------------- | ---------------------------- |
+| **BLOB**         | Binary Large Object.         | `0xFFD8FFE0...` (image data) |
+| **BINARY(n)**    | Fixed-length binary data.    | `101011`                     |
+| **VARBINARY(n)** | Variable-length binary data. | `11001010`                   |
+
+
+6. JSON & Special Data Types
+
+Used for complex or structured data.
+| Data Type | Description                    | Example                                  |
+| --------- | ------------------------------ | ---------------------------------------- |
+| **JSON**  | Stores JSON-formatted text.    | `'{"name": "John", "age": 30}'`          |
+| **ENUM**  | Predefined set of values.      | `ENUM('small','medium','large')`         |
+| **UUID**  | Universally Unique Identifier. | `'550e8400-e29b-41d4-a716-446655440000'` |

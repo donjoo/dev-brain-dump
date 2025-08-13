@@ -1,0 +1,233 @@
+
+
+RDBMS (Relational DBMS) = stores data in tables with rows (records) and columns
+ (fields). Examples: MySQL, PostgreSQL, Oracle, SQL Server.
+
+
+
+Schema – Blueprint describing the database structure.
+
+ 1. Table
+
+    Definition: A table is a collection of related data organized into rows and columns.
+
+    Analogy: Think of it as an Excel sheet.
+
+2. Row (Record / Tuple)
+
+    Definition: A single, complete set of related data in a table.
+
+    Example:
+    (1, "Alice", 25, "London") is one row.
+
+
+3. Column (Field / Attribute)
+
+    Definition: A single category of data stored in all rows.
+
+    Example: The column name contains values "Alice", "Bob", etc.
+
+4. Keys
+
+Keys are used to uniquely identify records and define relationships between tables.
+
+    a) Primary Key (PK)
+
+            Definition: Uniquely identifies each row in a table.
+
+            Rules:
+
+                Must be unique.
+
+                Cannot be NULL.
+
+                One primary key per table (can be one or more columns).
+
+            Example:
+            
+                    CREATE TABLE Students (
+                        student_id INT PRIMARY KEY,
+                        name VARCHAR(50)
+                    );
+
+    b) Foreign Key (FK)
+
+        Definition: A column in one table that refers to the Primary Key in another table.
+
+        Purpose: Enforces referential integrity.
+
+        Example:
+            CREATE TABLE Orders (
+                order_id INT PRIMARY KEY,
+                student_id INT,
+                FOREIGN KEY (student_id) REFERENCES Students(student_id)
+            );
+
+    c) Composite Key
+
+        Definition: A primary key made up of two or more columns.
+
+        Used When: No single column can uniquely identify a row.
+        Example:
+            CREATE TABLE Enrollment (
+                student_id INT,
+                course_id INT,
+                PRIMARY KEY (student_id, course_id)
+            );
+            Here, a student can enroll in multiple courses, but (student_id, course_id) pair is unique.
+    
+5. Candidate Key
+
+    Definition: All columns (or combinations) that can qualify as a Primary Key.
+
+    From these, one is chosen as the PK.
+
+6. Alternate Key
+
+    Definition: Candidate keys that were not chosen as the Primary Key.
+
+7. Unique Key
+
+    Definition: Ensures all values in a column are different.
+
+    Difference from PK:
+
+        Can have multiple unique keys in a table.
+
+        Allows NULL values (PK does not).     
+    Example     email in a Students table
+
+
+
+8. Super Key
+
+    Definition: Any set of columns that can uniquely identify rows.
+
+    Example: PK, Composite PK, or even PK + extra columns.
+            {student_id}, {student_id, name}, {student_id, age} are all super keys
+
+
+Hierarchy of Keys in RDBMS
+
+    Super Key
+
+        Any set of one or more columns that can uniquely identify a row.
+
+        Example: {student_id}, {email}, {student_id, name}
+
+    Candidate Key (subset of super keys)
+
+        Minimal super keys — no extra/unnecessary columns.
+
+        Example: {student_id}, {email} (if both uniquely identify a student)
+
+    Primary Key (one chosen candidate key)
+
+        The official key for identification in the table.
+
+        Example: {student_id}
+
+    Unique Key (candidate key that’s not the primary key)
+
+        Still a super key because it uniquely identifies rows.
+
+        Example: {email} in a Students table where PK is {student_id}
+
+
+1. Indexes
+
+    Definition:
+    An index is a data structure (often a B-Tree or Hash) that helps the database find rows faster without scanning the entire table.
+
+    Why Use?
+
+        Speeds up SELECT queries.
+
+        Helps with WHERE, JOIN, ORDER BY, GROUP BY operations.
+
+    Trade-off:
+
+        Takes extra storage space.
+
+        Slows down INSERT, UPDATE, and DELETE because indexes must be updated too.
+
+    Types of Indexes:
+
+        Clustered Index
+
+            Rearranges the physical order of table data.
+
+            One per table (often the Primary Key by default).
+
+        Non-Clustered Index
+
+            Stores pointers to the actual rows instead of rearranging them.
+
+            Can have multiple per table.
+
+        Unique Index
+
+            Automatically created when a column is defined as UNIQUE or PRIMARY KEY.
+
+        Composite Index
+
+            Index on multiple columns.
+
+        
+        Example:        CREATE INDEX idx_name ON students(name);
+
+
+--------------------
+
+
+2. Constraints
+
+Constraints are rules applied on columns to enforce data integrity.
+
+
+    a) NOT NULL
+
+        Ensures: Column cannot have NULL values.
+
+        Example:
+
+                name VARCHAR(50) NOT NULL
+
+    b) UNIQUE
+
+            Ensures: No duplicate values in the column.
+
+            NULL Handling: Allows NULL values (varies by DBMS).
+
+            Example:
+
+        email VARCHAR(100) UNIQUE
+
+    
+
+    c) CHECK
+
+        Ensures: Values meet a specific condition.
+
+        Example:
+
+        age INT CHECK (age >= 18)
+
+    d) DEFAULT
+
+        Sets: Default value if no value is provided.
+
+        Example:
+
+    status VARCHAR(10) DEFAULT 'Active'
+
+
+
+What’s the difference between an index and a unique constraint? →
+
+    A unique constraint is about data integrity (no duplicates), while an index
+    is about performance. A unique constraint automatically creates a unique index,
+    but not all indexes enforce uniqueness.
+
+
+    

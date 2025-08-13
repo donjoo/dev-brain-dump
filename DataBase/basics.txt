@@ -1,0 +1,72 @@
+
+#  Database – Definition
+
+A database is an organized collection of data stored electronically, designed 
+so you can create, read, update, and delete (CRUD) data efficiently.
+It can store numbers, text, images, videos — anything that needs structured 
+or semi-structured access.
+
+DBMS (Database Management System) = software to create, read, update, delete (CRUD) data.
+
+RDBMS (Relational DBMS) = stores data in tables with rows (records) and columns (fields).
+ Examples: MySQL, PostgreSQL, Oracle, SQL Server.
+
+ 
+------------
+
+#   Types of Databases (Mainly Two)
+
+1. Relational Database (RDB)
+
+    Structure: Data is stored in tables (rows & columns).
+
+    Model: Based on relations (mathematical term for tables).
+
+    Access Language: SQL (Structured Query Language).
+
+    Data Relationships: Managed using primary keys and foreign keys.
+
+    Schema: Fixed schema — must define table structure before inserting data.
+
+    Examples: MySQL, PostgreSQL, Oracle, SQL Server.
+
+
+
+
+
+
+2. Non-relational Database (NoSQL)
+
+    Structure: Data is stored in non-tabular formats such as key-value pairs, documents, graphs, or wide-column stores.
+
+    Model: Optimized for flexibility and scalability.
+
+    Schema: Flexible / schema-less — no fixed table structure required.
+
+    Data Relationships: Embedded documents or references (not strict like foreign keys).
+
+    Examples: MongoDB (document), Redis (key-value), Neo4j (graph), Cassandra (wide-column).
+
+
+Quick Comparison Table
+
+
+
+| Feature        | Relational (SQL)                 | Non-relational (NoSQL)                         |
+| -------------- | -------------------------------- | ---------------------------------------------- |
+| Data Format    | Tables (rows, columns)           | Documents, key-value, graph, etc.              |
+| Schema         | Fixed (predefined)               | Flexible / schema-less                         |
+| Query Language | SQL                              | Various (JSON queries, APIs, etc.)             |
+| Scalability    | Vertical (bigger server)         | Horizontal (more servers)                      |
+| Best For       | Structured data, complex queries | Unstructured/semi-structured data, scalability |
+
+
+
+    Relational → when data is structured, relationships are important, and transactions (ACID) matter.
+
+    Non-relational → when data changes often, schema flexibility is needed, or huge scalability is a priority.
+
+
+
+
+    --------------------------------------------------------------------------------------
