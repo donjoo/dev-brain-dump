@@ -1,0 +1,147 @@
+What is Normalization?
+
+    Definition:
+    The process of organizing data in a database to reduce redundancy and improve data integrity.
+
+    Purpose:
+
+        Eliminate duplicate data.
+
+        Ensure data dependencies make sense.
+
+        Improve consistency.
+
+
+1NF — First Normal Form
+
+Rule:
+
+    Each column should contain atomic (indivisible) values.
+
+    No repeating groups or arrays.
+
+A table is in First Normal Form (1NF) if all of its columns contain
+ only atomic (indivisible) values, and each record is unique.
+
+
+
+
+
+ 2NF — Second Normal Form
+
+Rule:
+
+    Be in 1NF and
+
+    Remove partial dependencies (no non-key attribute should depend 
+    on only part of a composite key).
+    Every non-key column is fully dependent on the entire primary key,
+    not just part of it.
+
+Key Idea
+    Partial dependency happens when a non-key column depends on only
+    part of a composite primary key (a primary key made of more than 
+    one column).
+    In 2NF, every non-key column must depend on the whole key.
+
+    (StudentID, CourseID) → StudentName
+
+
+3NF — Third Normal Form
+
+Rule:
+
+    Be in 2NF and
+
+    Remove transitive dependencies (non-key attributes must depend only 
+    on the primary key, not on other non-key attributes).
+
+    EmployeeID → DepartmentID → DepartmentName
+
+
+
+
+
+2NF: "Does the column depend on the whole key?"
+
+3NF: "Does the column depend only on the key and not on another column?"
+
+
+
+
+BCNF — Boyce–Codd Normal Form
+
+Boyce–Codd Normal Form (BCNF) is like a stronger version of 3NF — it fixes some rare cases where a table is in 3NF but still has anomalies because of certain functional dependencies.
+Definition
+
+    A table is in BCNF if:
+
+        It is already in 3NF.
+
+        For every functional dependency X → Y, X must be a superkey (i.e., uniquely identify a row).
+
+Key Difference from 3NF
+
+    3NF allows a situation where a non-prime attribute (not part of a key) depends on a candidate key but the determinant is not a superkey.
+
+    BCNF removes that loophole — the left-hand side of every functional dependency must be a superkey.
+
+
+
+
+4NF — Fourth Normal Form
+
+
+Fourth Normal Form (4NF) goes beyond BCNF to handle a special kind of redundancy caused by multi-valued dependencies.
+Definition
+
+    A table is in Fourth Normal Form (4NF) if:
+
+        It is already in Boyce–Codd Normal Form (BCNF).
+
+        It has no multi-valued dependencies — except those caused by a candidate key.
+
+What is a Multi-Valued Dependency?
+
+    A multi-valued dependency occurs when one key determines two or more independent sets of values.
+
+    This causes unnecessary duplication in the table.
+
+
+
+
+5NF — Fifth Normal Form (a.k.a. Projection–Join Normal Form)
+ also called Projection–Join Normal Form (PJNF) — is the stage of normalization that eliminates redundancy caused by join dependencies.
+Definition
+
+    A table is in 5NF if:
+
+        It is already in 4NF.
+
+        It cannot be decomposed into smaller tables without losing data or creating redundancy, except when the decomposition is based on candidate keys.
+
+Key Idea
+
+    Sometimes, information in a table can be reconstructed by joining multiple smaller tables.
+
+    If you can split a table into smaller tables and still get the same data back by joining them, without introducing spurious (fake) rows, then the original table may not be in 5NF.
+
+    5NF ensures that every join dependency is a result of candidate keys — no extra hidden dependencies.
+
+
+
+
+
+
+
+
+
+
+| Form | Removes                 | Key Focus                        |
+| ---- | ----------------------- | -------------------------------- |
+| 1NF  | Repeating groups        | Atomic values                    |
+| 2NF  | Partial dependency      | Full PK dependency               |
+| 3NF  | Transitive dependency   | Only PK dependency               |
+| BCNF | Key anomalies           | Every determinant is a super key |
+| 4NF  | Multi-valued dependency | Independent facts                |
+| 5NF  | Join dependency         | Minimal decomposition            |
