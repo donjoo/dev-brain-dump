@@ -183,7 +183,7 @@ Hierarchy of Keys in RDBMS
 2. Constraints
 
 Constraints are rules applied on columns to enforce data integrity.
-
+and ensure that stored values meet certain requirements.
 
     a) NOT NULL
 
