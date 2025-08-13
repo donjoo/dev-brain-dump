@@ -1,0 +1,111 @@
+ACID Properties (RDBMS Transactions)
+
+A transaction is a single logical unit of work in a database (like transferring 
+money between accounts).
+
+ ACID ensures that transactions are reliable and consistent, even in failures.
+ 
+ ACID is a set of properties — Atomicity, Consistency, Isolation, and Durability — 
+ that guarantee reliable processing of database transactions, ensuring that data 
+ remains accurate and consistent even in the event of errors, system failures, 
+ or concurrent access.
+
+
+ 1. Atomicity — "All or Nothing"
+
+    Definition:
+    A transaction is indivisible — either all operations happen or none happen.
+
+    Purpose: Prevent partial updates.
+
+    Example:
+
+        Money transfer: Debit ₹500 from Account A, Credit ₹500 to Account B.
+
+        If credit fails, debit is rolled back.
+
+    How enforced: Rollback on failure.
+
+
+2. Consistency — "Valid state before and after"
+
+    Definition:
+    A transaction must leave the database in a consistent state — all rules, 
+    constraints, and triggers remain valid.
+    The database must move from one valid state to another.
+    Purpose: No data corruption or rule violations.
+
+    Example:
+
+        Age column cannot have negative values (CHECK constraint).
+
+        After transfer, total sum of balances must remain the same.
+
+        If a rule says account balance can’t be negative, the transaction 
+        must not break it.
+
+    How enforced: Constraints, triggers, and business rules.
+
+
+3. Isolation — "No Interference"
+
+    Definition:
+    Transactions run independently — partial results are not visible to others until committed.
+    Multiple transactions running at the same time must not affect each other’s results.
+    The outcome should be as if transactions were executed sequentially.
+
+    Purpose: Prevents race conditions and dirty reads.
+
+    Example:
+
+        Two people buying the last ticket at the same time — isolation ensures only one succeeds.
+
+    How enforced: Locking, MVCC (Multi-Version Concurrency Control).
+
+    Isolation Levels:
+
+        Read Uncommitted
+
+        Read Committed
+
+        Repeatable Read
+
+        Serializable (highest)
+
+4. Durability — "Permanent Changes"
+
+    Definition:
+    Once a transaction is committed, the changes are permanent, even after system crash.
+
+    Purpose: Ensure data persistence.
+
+    Example:
+
+        You withdraw money, bank crashes, but withdrawal is still recorded after restart.
+
+    How enforced: Write-ahead logs, backups, transaction logs.
+
+
+
+Quick Summary Table
+
+            | Property    | What it Means     | Prevents               |
+            | ----------- | ----------------- | ---------------------- |
+            | Atomicity   | All or nothing    | Partial updates        |
+            | Consistency | Data validity     | Constraint violations  |
+            | Isolation   | No interference   | Dirty/phantom reads    |
+            | Durability  | Permanent changes | Data loss after commit |
+
+
+
+
+
+Why use ER modeling?
+
+    It helps design the database logically, detect relationships early,
+     enforce data integrity, and reduce redundancy before implementing it physically.
+
+     ER Modeling?
+
+    Definition: A visual way to design and represent the structure of a database by showing 
+    entities, their attributes, and relationships.
