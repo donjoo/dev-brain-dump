@@ -1,0 +1,68 @@
+In Relational Database Management Systems (RDBMS), relationships describe 
+how data in one table is related to data in another table.
+They are the foundation of how RDBMSs connect and organize data without 
+duplicating it unnecessarily.
+
+
+1. Types of Relationships
+a) One-to-One (1:1)
+
+    Definition: A row in Table A is related to only one row in Table B, and vice versa.
+
+    Example:
+
+        Users table (user_id, name)
+
+        UserProfiles table (user_id, address, date_of_birth)
+
+        Each user has exactly one profile.
+
+    Implementation: Usually enforced with a Primary Key + Foreign Key with UNIQUE constraint.
+
+b) One-to-Many (1:N)
+
+    Definition: A row in Table A can relate to multiple rows in Table B, but each row in Table B relates to only one row in Table A.
+
+    Example:
+
+        Customers table (customer_id, name)
+
+        Orders table (order_id, customer_id, total_amount)
+
+        One customer can have many orders.
+
+    Implementation: Foreign key in the child table points to the parent table’s primary key.
+
+c) Many-to-Many (M:N)
+
+    Definition: Multiple rows in Table A can relate to multiple rows in Table B.
+
+    Example:
+
+        Students table (student_id, name)
+
+        Courses table (course_id, course_name)
+
+        A student can take many courses, and a course can have many students.
+
+    Implementation: Requires a junction table (bridge table).
+
+        Example: StudentCourses (student_id, course_id)
+
+2. Keys in Relationships
+
+    Primary Key (PK): Uniquely identifies a record in a table.
+
+    Foreign Key (FK): Points to a primary key in another table to establish the relationship.
+
+3. Referential Integrity
+
+    Ensures that a foreign key value must match an existing value in the referenced table or be NULL.
+
+    Controlled by ON DELETE and ON UPDATE actions:
+
+        CASCADE → Automatically delete/update child rows.
+
+        SET NULL → Set FK to NULL when parent is deleted.
+
+        RESTRICT/NO ACTION → Prevent deletion/update if child exists.
