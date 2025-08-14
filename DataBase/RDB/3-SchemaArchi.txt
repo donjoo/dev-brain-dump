@@ -1,0 +1,74 @@
+The 3-Schema Architecture is a framework proposed by the ANSI/SPARC (American National
+ Standards Institute / Standards Planning and Requirements Committee) to describe how 
+ database systems should be organized in layers.
+
+Its goal is to separate the user’s view, the logical structure, and the physical storage 
+of data — so changes in one layer don’t necessarily affect the others.
+
+
+
+Layers in the 3-Schema Architecture
+
+There are three levels:
+1️⃣ Internal Schema (Physical Level)
+
+    What it is: Describes how data is physically stored in the database.
+
+    Focus: Storage structure, file organization, indexes, access paths.
+
+    Who uses it: Database administrators (DBAs).
+
+    Example:
+
+        How a Customer table is stored on disk.
+
+        Whether the index is a B-tree or hash index.
+
+        Page size and file format.
+
+
+2️⃣ Conceptual Schema (Logical Level)
+
+    What it is: Describes the logical structure of the entire database — independent of physical details.
+
+    Focus: Entities, attributes, relationships, constraints.
+
+    Who uses it: Database designers.
+
+    Example:
+
+        Customer(customer_id, name, email, phone)
+
+        Relationship: Customer → Orders (One-to-Many).
+
+        Primary and foreign keys.
+
+3️⃣ External Schema (View Level)
+
+    What it is: Describes how individual users or applications see the data (user-specific views).
+
+    Focus: Security, personalization, restricted access.
+
+    Who uses it: Application developers, end users.
+
+    Example:
+
+        A sales rep only sees customers in their region.
+
+        A cashier’s view only shows Product Name and Price, not supplier details.
+
+
+
+
+
+Why it’s Important
+
+    Data Independence:
+
+        Logical Data Independence → Changes in the logical structure (conceptual schema) don’t affect external schemas.
+
+        Physical Data Independence → Changes in the physical storage (internal schema) don’t affect the logical schema.
+
+    Security → External schemas allow you to hide sensitive data.
+
+    Flexibility → You can optimize storage without changing application code.

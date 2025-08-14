@@ -1,0 +1,105 @@
+Joins in SQL
+
+Joins are used to retrieve data from multiple tables based on related columns between them.
+They are built on the concept of relationships between tables (usually via primary key and foreign key).
+
+
+1. INNER JOIN
+
+    Definition: Returns only matching rows between two tables based on the join condition.
+
+    Diagram: Intersection of two sets.
+
+    Example:
+        SELECT e.name, d.department_name
+        FROM Employees e
+        INNER JOIN Departments d
+        ON e.department_id = d.id;
+    Result: Employees that belong to an existing department.
+
+
+2. LEFT JOIN (or LEFT OUTER JOIN)
+
+    Definition: Returns all rows from the left table, and matching rows from the right table. Non-matching rows from the right table become NULL.
+
+    Diagram: Entire left circle + intersection.
+
+    Example:
+
+        SELECT e.name, d.department_name
+        FROM Employees e
+        LEFT JOIN Departments d
+        ON e.department_id = d.id;
+
+    Result: All employees, even if they don’t belong to a department.
+
+
+3. RIGHT JOIN (or RIGHT OUTER JOIN)
+
+    Definition: Returns all rows from the right table, and matching rows from the left table. Non-matching rows from the left table become NULL.
+
+    Diagram: Entire right circle + intersection.
+
+    Example:
+
+        SELECT e.name, d.department_name
+        FROM Employees e
+        RIGHT JOIN Departments d
+        ON e.department_id = d.id;
+
+    Result: All departments, even if no employee is assigned.
+
+
+4. FULL JOIN (or FULL OUTER JOIN)
+
+    Definition: Returns all rows from both tables, with NULLs where no match is found.
+
+    Diagram: Union of both sets.
+
+    Example:
+
+        SELECT e.name, d.department_name
+        FROM Employees e
+        FULL OUTER JOIN Departments d
+        ON e.department_id = d.id;
+
+    Result: All employees and all departments, matched where possible.
+
+
+5. CROSS JOIN
+
+    Definition: Returns Cartesian product — every row of the first table combined with every row of the second table.
+
+    Example:
+
+SELECT e.name, d.department_name
+FROM Employees e
+CROSS JOIN Departments d;
+
+    Result: If Employees has 10 rows and Departments has 5 rows → 50 rows total.
+
+6. SELF JOIN
+
+    Definition: Joins a table to itself (often to represent hierarchical data).
+
+    Example:
+
+        SELECT e.name AS Employee, m.name AS Manager
+        FROM Employees e
+        LEFT JOIN Employees m
+        ON e.manager_id = m.id;
+
+    Result: Shows each employee with their manager's name.
+
+
+INNER JOIN → only matches.
+
+LEFT JOIN → all left + matches.
+
+RIGHT JOIN → all right + matches.
+
+FULL JOIN → everything.
+
+CROSS JOIN → everything × everything.
+
+SELF JOIN → table joins with itself.

@@ -231,3 +231,43 @@ What’s the difference between an index and a unique constraint? →
 
 
     
+    ------------------------------
+1. What is an Index?
+
+    An index is a data structure that improves the speed of data retrieval operations on a table at the cost of additional storage and maintenance overhead.
+
+    Think of it like the index of a book — you don’t read the whole book, you jump to the page you need.
+
+                2. Why Use Indexes?
+
+                    Faster SELECT queries (searching, filtering, sorting).
+
+                    Helps in JOIN operations.
+
+                    Speeds up GROUP BY and ORDER BY queries.
+
+                    Reduces table scan overhead.
+
+                3. Drawbacks
+
+                    Consumes extra storage.
+
+                    Slows down INSERT, UPDATE, DELETE because indexes need to be updated.
+
+                    Over-indexing can reduce overall performance.
+                
+                5. How Index Works
+
+                        Database engine searches the index structure (B-Tree, Hash, or Bitmap).
+
+                        Finds the location of data in the table.
+
+                        Fetches the actual row from storage.
+
+                        Example:
+
+                    SELECT * FROM Employees WHERE last_name = 'Smith';
+
+                        If last_name is indexed → Database uses the index to jump directly to the matching rows.
+
+                        If no index → Database performs a full table scan.
