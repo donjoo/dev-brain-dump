@@ -1,0 +1,30 @@
+SQL (Structured Query Language) is a programming language specifically 
+designed for managing and interacting with relational databases.
+
+
+
+Definition
+
+    SQL is a standard language used to create, read, update, and delete
+    data (CRUD operations) in relational database management systems (RDBMS).
+
+Key Features of SQL
+
+    Data Querying: Retrieve specific data using SELECT.
+
+    Data Manipulation: Insert, update, or delete data using INSERT, UPDATE, DELETE.
+
+    Data Definition: Define or modify database structure using CREATE, ALTER, DROP.
+
+    Data Control: Manage access and permissions with GRANT and REVOKE.
+
+    Transaction Control: Ensure data integrity using COMMIT, ROLLBACK.
+
+Basic SQL Commands
+    | Category                           | Command                                     | Purpose                             |
+| ---------------------------------- | ------------------------------------------- | ----------------------------------- |
+| DDL (Data Definition Language)     | `CREATE TABLE`, `ALTER TABLE`, `DROP TABLE` | Define or modify database structure |
+| DML (Data Manipulation Language)   | `SELECT`, `INSERT`, `UPDATE`, `DELETE`      | Work with data inside tables        |
+| DCL (Data Control Language)        | `GRANT`, `REVOKE`                           | Control user permissions            |
+| TCL (Transaction Control Language) | `COMMIT`, `ROLLBACK`, `SAVEPOINT`           | Control transactions                |
+

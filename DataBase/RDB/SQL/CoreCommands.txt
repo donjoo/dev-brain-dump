@@ -1,0 +1,1796 @@
+1. What is DDL?    
+            (structure)
+    DDL (Data Definition Language) is a subset of SQL used to define, modify, or remove database structures such as tables, indexes, and schemas.
+
+    DDL commands affect the database schema, not the data itself.
+
+    DDL commands are auto-committed in most RDBMS (changes are permanent immediately).
+
+    2. Common DDL Commands
+        | Command      | Purpose                                           | Example                                                                                |
+| ------------ | ------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| **CREATE**   | Create a new database object (table, index, view) | `CREATE TABLE Employees (id INT PRIMARY KEY, name VARCHAR(50), salary DECIMAL(10,2));` |
+| **ALTER**    | Modify an existing database object                | `ALTER TABLE Employees ADD COLUMN department_id INT;`                                  |
+| **DROP**     | Delete an existing database object                | `DROP TABLE Employees;`                                                                |
+| **TRUNCATE** | Remove all rows from a table (faster than DELETE) | `TRUNCATE TABLE Employees;`                                                            |
+| **RENAME**   | Rename a database object                          | `ALTER TABLE Employees RENAME TO Staff;`                                               |
+
+
+
+
+3. Key Notes
+
+    CREATE → Define schema structure.
+
+    ALTER → Modify structure without losing data (add/remove columns, change datatype).
+
+    DROP → Deletes structure permanently along with data.
+
+    TRUNCATE → Deletes all data but keeps table structure intact.
+
+    DDL changes cannot be rolled back in most systems unless inside a transaction (some databases like PostgreSQL support transactional DDL).
+
+
+
+
+
+
+
+
+1. What is DML?
+
+    DML is a subset of SQL used to manipulate data inside existing database objects (usually tables).
+
+    Unlike DDL, DML changes data, not structure.
+
+    DML operations can be rolled back if inside a transaction.
+
+2. Common DML Commands
+
+    | Command    | Purpose                      | Example                                                                 |
+| ---------- | ---------------------------- | ----------------------------------------------------------------------- |
+| **SELECT** | Retrieve data from tables    | `SELECT name, salary FROM Employees WHERE salary > 50000;`              |
+| **INSERT** | Add new records into a table | `INSERT INTO Employees (id, name, salary) VALUES (1, 'John', 50000);`   |
+| **UPDATE** | Modify existing records      | `UPDATE Employees SET salary = salary * 1.1 WHERE department_id = 101;` |
+| **DELETE** | Remove records from a table  | `DELETE FROM Employees WHERE salary < 20000;`                           |
+
+
+You said:
+You are a database expert. i am asking things related to database. tell everything on that. i got a review i can fail.
+ChatGPT said:
+
+Got it — let’s make sure you ace that review.
+I’ll break things down in a structured, exam-friendly way so you can recall them quickly.
+Since you didn’t give a specific syllabus yet, I’ll cover all the core database concepts you’re likely to be tested on, from fundamentals to advanced topics.
+1. What is a Database?
+
+A database is an organized collection of structured information, stored electronically, that allows efficient retrieval, insertion, update, and deletion of data.
+Types of Databases
+
+    Relational Database (RDBMS) – Stores data in tables (rows & columns), uses SQL. Example: MySQL, PostgreSQL, Oracle, SQL Server.
+
+    Non-relational Database (NoSQL) – Stores data in formats like documents, key-value pairs, graphs, or wide-columns. Example: MongoDB, Redis, Neo4j.
+
+2. RDBMS Basics
+Components
+
+    Table – Structure for storing rows (records) and columns (fields).
+
+    Schema – Blueprint describing the database structure.
+
+    Primary Key (PK) – Uniquely identifies each record.
+
+    Foreign Key (FK) – References a PK from another table (used for relationships).
+
+    Indexes – Improve query performance but consume extra storage.
+
+    Constraints – Rules for data integrity:
+
+        NOT NULL – Column must have a value.
+
+        UNIQUE – No duplicate values.
+
+        CHECK – Validates a condition.
+
+        DEFAULT – Sets a default value.
+
+3. SQL Basics
+Data Query Language (DQL)
+
+SELECT column1, column2 FROM table_name;
+SELECT * FROM table_name WHERE condition;
+SELECT DISTINCT column_name FROM table_name;
+
+Data Manipulation Language (DML)
+
+INSERT INTO table_name (col1, col2) VALUES ('val1', 'val2');
+UPDATE table_name SET col1 = 'new' WHERE id = 1;
+DELETE FROM table_name WHERE id = 1;
+
+Data Definition Language (DDL)
+
+CREATE TABLE table_name (...);
+ALTER TABLE table_name ADD column_name datatype;
+DROP TABLE table_name;
+TRUNCATE TABLE table_name;
+
+4. Joins
+
+    INNER JOIN – Returns matching rows in both tables.
+
+    LEFT JOIN – All rows from left table + matched rows from right.
+
+    RIGHT JOIN – All rows from right table + matched rows from left.
+
+    FULL JOIN – All rows from both tables (matched + unmatched).
+
+Example:
+
+SELECT a.name, b.course
+FROM students a
+INNER JOIN courses b ON a.course_id = b.id;
+
+5. SQL Clauses
+
+    WHERE – Filters rows.
+
+    ORDER BY – Sorts results.
+
+    GROUP BY – Groups rows for aggregation.
+
+    HAVING – Filters after aggregation.
+
+    LIMIT / OFFSET – Restricts number of rows returned.
+
+6. Functions
+
+    Aggregate: COUNT(), SUM(), AVG(), MIN(), MAX()
+
+    String: CONCAT(), UPPER(), LOWER(), LENGTH()
+
+    Date: NOW(), DATE_ADD(), DATEDIFF()
+
+7. Relationships
+
+    One-to-One
+
+    One-to-Many
+
+    Many-to-Many (via junction table)
+
+8. Normalization
+
+    1NF – No repeating groups, atomic values.
+
+    2NF – 1NF + no partial dependency on PK.
+
+    3NF – 2NF + no transitive dependency.
+
+    BCNF – Stronger form of 3NF.
+
+Purpose: Reduce redundancy, improve integrity.
+9. Indexes
+
+    Clustered Index – Rearranges physical order of data (one per table).
+
+    Non-clustered Index – Separate structure with pointers to data.
+
+    Trade-off: Faster reads, slower writes.
+
+10. Transactions
+
+    ACID Properties:
+
+        Atomicity – All or nothing.
+
+        Consistency – Valid state after transaction.
+
+        Isolation – Transactions don’t interfere.
+
+        Durability – Changes persist after commit.
+
+Example:
+
+BEGIN;
+UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+COMMIT;
+
+11. Advanced Concepts
+
+    Views – Saved SQL queries acting like virtual tables.
+
+    Stored Procedures – Precompiled SQL code.
+
+    Triggers – Actions fired automatically on events (INSERT, UPDATE, DELETE).
+
+    CTE (Common Table Expression) – Temporary named result set.
+
+    Subqueries – Query inside another query.
+
+    Partitioning – Dividing large tables for performance.
+
+    Replication & Sharding – Distributing data for scalability.
+
+12. Security
+
+    Use GRANT & REVOKE for permissions.
+
+    Always sanitize inputs to prevent SQL Injection.
+
+If your review is practical, I can drill you with SQL problem-solving exercises so you’re confident in real queries, joins, and tricky scenarios.
+
+Do you want me to prepare a high-yield “review crash sheet” with diagrams + example queries so you can revise everything in under 15 minutes? That’ll make you nearly fail-proof.
+You said:
+RDBMS Concepts: Tables, rows, columns, keys (primary, foreign, composite) etc..
+ChatGPT said:
+
+Alright — let’s nail RDBMS core concepts so you can explain them confidently in your review.
+I’ll go point-by-point with definitions, examples, and where mistakes often happen in interviews.
+1. Table
+
+    Definition: A table is a collection of related data organized into rows and columns.
+
+    Analogy: Think of it as an Excel sheet.
+
+    Example:
+    id	name	age	city
+    1	Alice	25	London
+    2	Bob	30	Mumbai
+
+2. Row (Record / Tuple)
+
+    Definition: A single, complete set of related data in a table.
+
+    Example:
+    (1, "Alice", 25, "London") is one row.
+
+3. Column (Field / Attribute)
+
+    Definition: A single category of data stored in all rows.
+
+    Example: The column name contains values "Alice", "Bob", etc.
+
+4. Keys
+
+Keys are used to uniquely identify records and define relationships between tables.
+a) Primary Key (PK)
+
+    Definition: Uniquely identifies each row in a table.
+
+    Rules:
+
+        Must be unique.
+
+        Cannot be NULL.
+
+        One primary key per table (can be one or more columns).
+
+    Example:
+
+    CREATE TABLE Students (
+        student_id INT PRIMARY KEY,
+        name VARCHAR(50)
+    );
+
+b) Foreign Key (FK)
+
+    Definition: A column in one table that refers to the Primary Key in another table.
+
+    Purpose: Enforces referential integrity.
+
+    Example:
+
+    CREATE TABLE Orders (
+        order_id INT PRIMARY KEY,
+        student_id INT,
+        FOREIGN KEY (student_id) REFERENCES Students(student_id)
+    );
+
+    Here, student_id in Orders must exist in Students.
+
+c) Composite Key
+
+    Definition: A primary key made up of two or more columns.
+
+    Used When: No single column can uniquely identify a row.
+
+    Example:
+
+    CREATE TABLE Enrollment (
+        student_id INT,
+        course_id INT,
+        PRIMARY KEY (student_id, course_id)
+    );
+
+    Here, a student can enroll in multiple courses, but (student_id, course_id) pair is unique.
+
+5. Candidate Key
+
+    Definition: All columns (or combinations) that can qualify as a Primary Key.
+
+    From these, one is chosen as the PK.
+
+6. Alternate Key
+
+    Definition: Candidate keys that were not chosen as the Primary Key.
+
+7. Unique Key
+
+    Definition: Ensures all values in a column are different.
+
+    Difference from PK:
+
+        Can have multiple unique keys in a table.
+
+        Allows NULL values (PK does not).
+
+8. Super Key
+
+    Definition: Any set of columns that can uniquely identify rows.
+
+    Example: PK, Composite PK, or even PK + extra columns.
+
+9. Example Diagram of Relationships
+
+Students Table
+---------------
+student_id (PK)
+name
+age
+
+Orders Table
+-------------
+order_id (PK)
+student_id (FK) -> Students.student_id
+order_date
+
+    One-to-Many relationship: One student can have many orders.
+
+If you want, I can now prepare a compact RDBMS keys diagram with examples so you can visually remember primary, foreign, composite, candidate, alternate, unique, and super keys in under 60 seconds.
+
+Do you want me to make that diagram?
+You said:
+
+**7\. Unique Key** ------------------ * **Definition**: Ensures all values in a column are different. * **Difference from PK**: * Can have **multiple unique keys** in a table. * Allows **NULL values** (PK does not). * * * **8\. Super Key** ----------------- * **Definition**: Any set of columns that can uniquely identify rows. * **Example**: PK, Composite PK, or even PK + extra columns.
+whats the differnce with primary key
+ChatGPT said:
+
+Here’s the clear difference between a Primary Key, Unique Key, and Super Key — since they often sound similar but aren’t the same.
+Primary Key vs Unique Key
+Feature	Primary Key	Unique Key
+Purpose	Uniquely identifies each row	Ensures column values are unique
+Nulls allowed?	❌ No NULL values allowed	✅ Allows one or more NULL values (depends on DBMS)
+Count per table	Only one primary key per table	Can have multiple unique keys
+Default Index	Automatically creates a clustered index (in many DBMSs)	Usually creates a non-clustered index
+Requirement	Must be NOT NULL and unique	Only needs to be unique (NULL allowed)
+Example	student_id in a Students table	email in a Students table
+Primary Key vs Super Key
+Feature	Primary Key	Super Key
+Definition	The chosen key from candidate keys to uniquely identify rows	Any set of columns that can uniquely identify rows
+Minimality	Always minimal (no extra columns)	Can have extra unnecessary columns
+Count per table	Only one PK	Can have many super keys
+Example	student_id	{student_id}, {student_id, name}, {student_id, age} are all super keys
+
+💡 Simple way to remember:
+
+    Primary Key = The “official” unique identifier (no NULLs, only one per table).
+
+    Unique Key = Additional uniqueness constraints (NULLs allowed, multiple allowed).
+
+    Super Key = Any key that could uniquely identify rows — PK is just one of them, but minimal.
+
+If you want, I can make you a memory table showing PK, FK, Unique, Composite, Candidate, Alternate, Super Key side by side with examples so you can recall them instantly in your review. That way you won’t confuse them.
+You said:
+so unique key is a super key
+ChatGPT said:
+
+Yes ✅ — a Unique Key is technically a type of Super Key.
+
+Here’s the hierarchy so you see the relationship clearly:
+Hierarchy of Keys in RDBMS
+
+    Super Key
+
+        Any set of one or more columns that can uniquely identify a row.
+
+        Example: {student_id}, {email}, {student_id, name}
+
+    Candidate Key (subset of super keys)
+
+        Minimal super keys — no extra/unnecessary columns.
+
+        Example: {student_id}, {email} (if both uniquely identify a student)
+
+    Primary Key (one chosen candidate key)
+
+        The official key for identification in the table.
+
+        Example: {student_id}
+
+    Unique Key (candidate key that’s not the primary key)
+
+        Still a super key because it uniquely identifies rows.
+
+        Example: {email} in a Students table where PK is {student_id}
+
+💡 Rule:
+
+    Every Primary Key is a Candidate Key and a Super Key.
+    Every Unique Key is also a Candidate Key and a Super Key.
+    But not every Super Key is a Primary or Unique key (some have extra columns).
+
+If you want, I can draw you a Venn diagram of keys so you instantly remember how PK, Unique, Candidate, and Super Keys are related. It’s a favorite in interviews.
+You said:
+    Indexes – Improve query performance but consume extra storage.
+
+    Constraints – Rules for data integrity:
+
+        NOT NULL – Column must have a value.
+
+        UNIQUE – No duplicate values.
+
+        CHECK – Validates a condition.
+
+        DEFAULT – Sets a default value.
+ChatGPT said:
+
+Alright — let’s go deeper on Indexes and Constraints so you can explain them clearly in your review without hesitation.
+1. Indexes
+
+    Definition:
+    An index is a data structure (often a B-Tree or Hash) that helps the database find rows faster without scanning the entire table.
+
+    Why Use?
+
+        Speeds up SELECT queries.
+
+        Helps with WHERE, JOIN, ORDER BY, GROUP BY operations.
+
+    Trade-off:
+
+        Takes extra storage space.
+
+        Slows down INSERT, UPDATE, and DELETE because indexes must be updated too.
+
+    Types of Indexes:
+
+        Clustered Index
+
+            Rearranges the physical order of table data.
+
+            One per table (often the Primary Key by default).
+
+        Non-Clustered Index
+
+            Stores pointers to the actual rows instead of rearranging them.
+
+            Can have multiple per table.
+
+        Unique Index
+
+            Automatically created when a column is defined as UNIQUE or PRIMARY KEY.
+
+        Composite Index
+
+            Index on multiple columns.
+
+    Example:
+
+    CREATE INDEX idx_name ON students(name);
+
+2. Constraints
+
+Constraints are rules applied on columns to enforce data integrity.
+a) NOT NULL
+
+    Ensures: Column cannot have NULL values.
+
+    Example:
+
+    name VARCHAR(50) NOT NULL
+
+b) UNIQUE
+
+    Ensures: No duplicate values in the column.
+
+    NULL Handling: Allows NULL values (varies by DBMS).
+
+    Example:
+
+    email VARCHAR(100) UNIQUE
+
+c) CHECK
+
+    Ensures: Values meet a specific condition.
+
+    Example:
+
+    age INT CHECK (age >= 18)
+
+d) DEFAULT
+
+    Sets: Default value if no value is provided.
+
+    Example:
+
+    status VARCHAR(10) DEFAULT 'Active'
+
+💡 Tip for your review:
+If they ask “What’s the difference between an index and a unique constraint?” →
+
+    A unique constraint is about data integrity (no duplicates), while an index is about performance. A unique constraint automatically creates a unique index, but not all indexes enforce uniqueness.
+
+If you want, I can give you a one-page RDBMS revision sheet combining tables, keys, indexes, and constraints with diagrams so you can go into the review with everything in one place. That would make recall instant.
+You said:
+Data Types: INT, VARCHAR, DATE, JSON, etc.
+ChatGPT said:
+
+Alright — here’s a review-ready breakdown of the common SQL Data Types you should know for your RDBMS review, with examples and key points.
+1. Numeric Data Types
+
+Used for storing numbers.
+Data Type	Description	Example
+INT / INTEGER	Whole numbers (no decimals).	42
+SMALLINT	Smaller range of integers.	120
+BIGINT	Large integers.	9000000000
+DECIMAL(p,s) / NUMERIC(p,s)	Fixed-point decimal, p = total digits, s = digits after decimal.	DECIMAL(5,2) → 123.45
+FLOAT / REAL	Approximate decimal (floating point).	3.14159
+DOUBLE PRECISION	Higher precision floating point.	1.23456789
+2. String Data Types
+
+Used for text storage.
+Data Type	Description	Example
+CHAR(n)	Fixed-length string (pads with spaces if shorter).	'ABC' (CHAR(5) → "ABC ")
+VARCHAR(n)	Variable-length string, up to n characters.	'Hello'
+TEXT	Large text data, no fixed limit (depends on DBMS).	'Long description...'
+3. Date & Time Data Types
+
+Used for temporal values.
+Data Type	Description	Example
+DATE	Stores date only.	'2025-08-13'
+TIME	Stores time only.	'14:35:00'
+DATETIME / TIMESTAMP	Stores date & time.	'2025-08-13 14:35:00'
+YEAR	Stores a year.	2025
+4. Boolean Data Types
+
+Used for true/false values.
+Data Type	Description	Example
+BOOLEAN / BOOL	Stores TRUE or FALSE (often stored as 1 and 0 internally).	TRUE
+5. Binary Data Types
+
+Used for raw binary data like images or files.
+Data Type	Description	Example
+BLOB	Binary Large Object.	0xFFD8FFE0... (image data)
+BINARY(n)	Fixed-length binary data.	101011
+VARBINARY(n)	Variable-length binary data.	11001010
+6. JSON & Special Data Types
+
+Used for complex or structured data.
+Data Type	Description	Example
+JSON	Stores JSON-formatted text.	'{"name": "John", "age": 30}'
+ENUM	Predefined set of values.	ENUM('small','medium','large')
+UUID	Universally Unique Identifier.	'550e8400-e29b-41d4-a716-446655440000'
+
+💡 Review Tip:
+If they ask “When would you use VARCHAR vs TEXT?” →
+
+    Use VARCHAR when you know the maximum size and want indexing; use TEXT for very large, unstructured text where indexing isn’t always required.
+
+If you want, I can give you a color-coded SQL data type diagram grouping numeric, string, date/time, boolean, binary, and JSON types so you can memorize them visually in under 2 minutes. That’s something interviewers love seeing.
+You said:
+ACID Properties (Atomicity, Consistency, Isolation, Durability)
+ChatGPT said:
+
+Got it — here’s the ACID properties breakdown in a review-friendly format so you can recall them instantly in your database review.
+ACID Properties (RDBMS Transactions)
+
+A transaction is a single logical unit of work in a database (like transferring money between accounts).
+ACID ensures that transactions are reliable and consistent, even in failures.
+1. Atomicity — "All or Nothing"
+
+    Definition:
+    A transaction is indivisible — either all operations happen or none happen.
+
+    Purpose: Prevent partial updates.
+
+    Example:
+
+        Money transfer: Debit ₹500 from Account A, Credit ₹500 to Account B.
+
+        If credit fails, debit is rolled back.
+
+    How enforced: Rollback on failure.
+
+2. Consistency — "Valid State"
+
+    Definition:
+    A transaction must leave the database in a consistent state — all rules, constraints, and triggers remain valid.
+
+    Purpose: No data corruption or rule violations.
+
+    Example:
+
+        Age column cannot have negative values (CHECK constraint).
+
+        After transfer, total sum of balances must remain the same.
+
+    How enforced: Constraints, triggers, and business rules.
+
+3. Isolation — "No Interference"
+
+    Definition:
+    Transactions run independently — partial results are not visible to others until committed.
+
+    Purpose: Prevents race conditions and dirty reads.
+
+    Example:
+
+        Two people buying the last ticket at the same time — isolation ensures only one succeeds.
+
+    How enforced: Locking, MVCC (Multi-Version Concurrency Control).
+
+    Isolation Levels:
+
+        Read Uncommitted
+
+        Read Committed
+
+        Repeatable Read
+
+        Serializable (highest)
+
+4. Durability — "Permanent Changes"
+
+    Definition:
+    Once a transaction is committed, the changes are permanent, even after system crash.
+
+    Purpose: Ensure data persistence.
+
+    Example:
+
+        You withdraw money, bank crashes, but withdrawal is still recorded after restart.
+
+    How enforced: Write-ahead logs, backups, transaction logs.
+
+Quick Summary Table
+Property	What it Means	Prevents
+Atomicity	All or nothing	Partial updates
+Consistency	Data validity	Constraint violations
+Isolation	No interference	Dirty/phantom reads
+Durability	Permanent changes	Data loss after commit
+
+💡 Memory Trick:
+Think of ACID as the guarantee that your database is “safe to eat” — if any of these is missing, your transaction could be “half-cooked” 🍲.
+
+If you want, I can make you a real-life analogy diagram of ACID properties using a bank transaction example — that’s a favorite in viva and whiteboard interviews. Would you like me to prepare that?
+You said:
+ER Modeling (Entity-Relationship diagrams)
+ChatGPT said:
+
+Alright — here’s a review-focused guide to ER Modeling (Entity–Relationship Diagrams) so you can explain it confidently in your database review.
+1. What is ER Modeling?
+
+    Definition: A visual way to design and represent the structure of a database by showing entities, their attributes, and relationships.
+
+    Purpose: Helps plan the database logically before creating tables.
+
+2. Main Components
+a) Entity
+
+    Definition: A real-world object or concept stored in the database.
+
+    Types:
+
+        Strong Entity: Exists independently (e.g., Student, Course).
+
+        Weak Entity: Depends on another entity (e.g., OrderItem depends on Order).
+
+    Notation: Rectangle in ER diagram.
+
+    Example:
+    Student (student_id, name, age)
+
+b) Attributes
+
+    Definition: Properties or details of an entity.
+
+    Types:
+
+        Simple: Cannot be divided further (name, age).
+
+        Composite: Can be divided into sub-parts (full_name → first_name, last_name).
+
+        Derived: Calculated from other attributes (age from date_of_birth).
+
+        Multivalued: Can have multiple values (phone_numbers).
+
+    Notation: Oval in ER diagram.
+
+    Example:
+    Student → Attributes: student_id, name, email
+
+c) Relationships
+
+    Definition: Association between two or more entities.
+
+    Types by Cardinality:
+
+        One-to-One (1:1): One entity instance relates to exactly one in another entity.
+        Example: Each Student has exactly one StudentIDCard.
+
+        One-to-Many (1:N): One entity instance relates to many in another entity.
+        Example: One Teacher teaches many Students.
+
+        Many-to-Many (M:N): Many instances relate to many others.
+        Example: Students enroll in multiple Courses; Courses have multiple Students.
+        Implemented using a junction table.
+
+    Notation: Diamond shape in ER diagram.
+
+3. Keys in ER Model
+
+    Primary Key: Uniquely identifies each entity instance.
+
+    Foreign Key: Links entities through relationships.
+
+    Composite Key: Uses multiple attributes to uniquely identify.
+
+4. Example ER Diagram
+
+Scenario: A Student enrolls in Courses.
+
+[STUDENT]----------------<ENROLLS>----------------[COURSE]
+   |PK student_id                              |PK course_id
+   | name                                      | title
+   | email                                     | credits
+
+    Relationship: Many-to-Many (A student can enroll in many courses, and a course can have many students).
+
+    Implementation:
+    Create an ENROLLMENT table with (student_id, course_id) as a composite primary key.
+
+5. Converting ER Diagram to Tables
+
+    Entity → Table
+
+        Attributes → Columns
+
+        Primary Key → Primary Key
+
+    Relationships:
+
+        1:1 → Add foreign key to one table.
+
+        1:N → Add foreign key in the "many" table.
+
+        M:N → Create a new table with foreign keys from both entities.
+
+💡 Tip for Review:
+If they ask “Why use ER modeling?”, answer:
+
+    It helps design the database logically, detect relationships early, enforce data integrity, and reduce redundancy before implementing it physically.
+
+If you want, I can make you a clean ER diagram example with shapes and symbols so you can quickly memorize the notations (entities, attributes, relationships, cardinality). That would help you draw it instantly in an exam.
+You said:
+Normalization (1NF → 5NF)
+ChatGPT said:
+
+Alright — here’s your exam-friendly crash guide to Normalization (1NF → 5NF) so you can explain each form confidently in your review.
+What is Normalization?
+
+    Definition:
+    The process of organizing data in a database to reduce redundancy and improve data integrity.
+
+    Purpose:
+
+        Eliminate duplicate data.
+
+        Ensure data dependencies make sense.
+
+        Improve consistency.
+
+1NF — First Normal Form
+
+Rule:
+
+    Each column should contain atomic (indivisible) values.
+
+    No repeating groups or arrays.
+
+Example — ❌ Not in 1NF:
+student_id	name	subjects
+1	John	Math, Physics
+
+✅ 1NF:
+student_id	name	subject
+1	John	Math
+1	John	Physics
+2NF — Second Normal Form
+
+Rule:
+
+    Be in 1NF and
+
+    Remove partial dependencies (no non-key attribute should depend on only part of a composite key).
+
+Example — ❌ Not in 2NF:
+PK = (student_id, course_id)
+student_id	course_id	student_name
+1	101	John
+
+student_name depends only on student_id → partial dependency.
+
+✅ 2NF:
+
+    Students(student_id, student_name)
+
+    Enrollments(student_id, course_id)
+
+3NF — Third Normal Form
+
+Rule:
+
+    Be in 2NF and
+
+    Remove transitive dependencies (non-key attributes must depend only on the primary key, not on other non-key attributes).
+
+Example — ❌ Not in 3NF:
+student_id	name	city	zip_code
+1	John	London	E1 6AN
+
+Here, city depends on zip_code, not directly on student_id.
+
+✅ 3NF:
+
+    Students(student_id, name, zip_code)
+
+    ZipCodes(zip_code, city)
+
+BCNF — Boyce–Codd Normal Form
+
+Rule:
+
+    Stricter than 3NF: For every functional dependency X → Y, X must be a super key.
+
+Example:
+In a Course table with (course_id, professor) and rule: each professor teaches only one course,
+professor → course_id violates BCNF because professor is not a super key.
+4NF — Fourth Normal Form
+
+Rule:
+
+    Be in BCNF and
+
+    Remove multi-valued dependencies (one key shouldn’t determine two or more independent sets of values).
+
+Example — ❌ Not in 4NF:
+student_id	hobby	skill
+1	Chess	Python
+1	Chess	SQL
+1	Painting	Python
+
+Here, hobbies and skills are independent; separate into two tables.
+5NF — Fifth Normal Form (a.k.a. Projection–Join Normal Form)
+
+Rule:
+
+    Be in 4NF and
+
+    Remove join dependencies that are not implied by candidate keys (table should not be broken into smaller tables unless necessary).
+
+    Often applies in very complex many-to-many relationships.
+
+Quick Summary Table
+Form	Removes	Key Focus
+1NF	Repeating groups	Atomic values
+2NF	Partial dependency	Full PK dependency
+3NF	Transitive dependency	Only PK dependency
+BCNF	Key anomalies	Every determinant is a super key
+4NF	Multi-valued dependency	Independent facts
+5NF	Join dependency	Minimal decomposition
+
+💡 Memory Trick:
+Think of normalization like filtering water —
+1NF removes big chunks,
+2NF removes smaller impurities,
+3NF polishes it,
+BCNF ensures it’s pure,
+4NF & 5NF are ultra-purification for rare cases.
+
+If you want, I can give you a visual step-by-step diagram showing a single table evolving from unnormalized → 1NF → 5NF so you can recall the rules instantly in your review. Would you like me to make that?
+You said:
+How SQL engines process queries
+ChatGPT said:
+
+Alright, let's go step-by-step into how SQL engines process queries — because this is one of those topics that interviewers love to ask to see if you really understand what’s happening “under the hood” of an RDBMS.
+SQL Query Processing Flow
+
+When you execute something like:
+
+SELECT name 
+FROM employees 
+WHERE salary > 50000 
+ORDER BY name;
+
+The SQL engine doesn't just "read it top to bottom" — it follows a multi-stage process.
+1. Parsing
+
+    SQL is declarative, so you describe what you want, not how to get it.
+
+    The SQL parser:
+
+        Checks syntax (grammar).
+
+        Checks semantics (do the tables/columns exist? Are you allowed to access them?).
+
+        Produces a parse tree (internal representation of the query).
+
+2. Query Optimization
+
+    This is the brainy part.
+
+    The query optimizer:
+
+        Decides how to execute your query in the fastest way.
+
+        Picks indexes if available.
+
+        Chooses join algorithms (nested loop, hash join, merge join).
+
+        Determines whether to use sequential scan or index scan.
+
+        Reorders operations for efficiency (e.g., filtering before joining).
+
+    Example:
+    Without optimization → scan 1 million rows.
+    With optimization → use index to scan only 5,000 rows.
+
+3. Execution Plan
+
+    The optimizer creates an execution plan (a set of instructions for the database engine).
+
+    You can see it using:
+
+    EXPLAIN SELECT ...
+
+    Plans are often tree-shaped, where:
+
+        Leaves = data access (table/index scan).
+
+        Nodes = operations (filter, join, sort).
+
+4. Execution
+
+    The execution engine follows the plan:
+
+        Fetch rows from disk/memory (using buffer cache).
+
+        Apply filters (WHERE).
+
+        Perform joins/grouping/aggregation if needed.
+
+        Sort rows (ORDER BY).
+
+        Return result to the client.
+
+5. Storage Engine Interaction
+
+    The execution engine interacts with the storage engine (like InnoDB in MySQL, or the PostgreSQL storage layer):
+
+        Reads/writes data pages from disk.
+
+        Manages transactions (ACID compliance).
+
+        Uses caching to avoid repeated disk reads.
+
+Important Points
+
+    Logical Query Processing Order (what SQL means):
+
+        FROM → JOIN
+
+        WHERE
+
+        GROUP BY
+
+        HAVING
+
+        SELECT
+
+        ORDER BY
+
+        LIMIT
+
+    This is different from how the engine physically processes it.
+
+    Indexes and statistics help the optimizer make better decisions.
+
+✅ In short:
+The SQL engine takes your query, turns it into a plan, optimizes that plan, and then executes it in the most efficient way it can — balancing CPU, memory, and disk usage.
+
+If you want, I can make you a visual diagram of query processing flow so you can remember it easily during the review.
+Do you want me to prepare that?
+You said:
+Constrains
+ChatGPT said:
+
+In databases, constraints are rules applied to table columns to maintain data integrity and ensure that stored values meet certain requirements.
+
+Here’s a breakdown of the main types of constraints:
+1. NOT NULL
+
+    Ensures that a column cannot store NULL values.
+
+    Used when the column must always have a value.
+
+CREATE TABLE Users (
+    id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+2. UNIQUE
+
+    Ensures all values in a column are unique.
+
+    Allows only one NULL value (depends on DBMS).
+
+    A table can have multiple unique constraints.
+
+CREATE TABLE Employees (
+    emp_id INT PRIMARY KEY,
+    email VARCHAR(255) UNIQUE
+);
+
+3. PRIMARY KEY
+
+    Uniquely identifies each row.
+
+    Combines NOT NULL and UNIQUE.
+
+    Only one primary key per table (can be composite).
+
+CREATE TABLE Orders (
+    order_id INT PRIMARY KEY,
+    order_date DATE NOT NULL
+);
+
+4. FOREIGN KEY
+
+    Establishes a link between two tables.
+
+    Ensures the value exists in the referenced table.
+
+    Enforces referential integrity.
+
+CREATE TABLE Orders (
+    order_id INT PRIMARY KEY,
+    customer_id INT,
+    FOREIGN KEY (customer_id) REFERENCES Customers(id)
+);
+
+5. CHECK
+
+    Ensures that the value meets a specific condition.
+
+CREATE TABLE Products (
+    product_id INT PRIMARY KEY,
+    price DECIMAL(10,2) CHECK (price > 0)
+);
+
+6. DEFAULT
+
+    Assigns a default value when no value is provided.
+
+CREATE TABLE Accounts (
+    id INT PRIMARY KEY,
+    balance DECIMAL(10,2) DEFAULT 0.00
+);
+
+✅ Quick Summary Table
+Constraint	Purpose
+NOT NULL	Column must always have a value
+UNIQUE	All values in the column must be different
+PRIMARY KEY	Uniquely identifies each row (NOT NULL + UNIQUE)
+FOREIGN KEY	Links to a column in another table
+CHECK	Ensures values satisfy a condition
+DEFAULT	Provides a fallback value if none is given
+
+If you want, I can also give you real-world examples of how multiple constraints work together in a single table design so it’s review-ready. That will help you ace this part in your database review.
+You said:
+Relationships
+ChatGPT said:
+
+In Relational Database Management Systems (RDBMS), relationships describe how data in one table is related to data in another table.
+They are the foundation of how RDBMSs connect and organize data without duplicating it unnecessarily.
+1. Types of Relationships
+a) One-to-One (1:1)
+
+    Definition: A row in Table A is related to only one row in Table B, and vice versa.
+
+    Example:
+
+        Users table (user_id, name)
+
+        UserProfiles table (user_id, address, date_of_birth)
+
+        Each user has exactly one profile.
+
+    Implementation: Usually enforced with a Primary Key + Foreign Key with UNIQUE constraint.
+
+b) One-to-Many (1:N)
+
+    Definition: A row in Table A can relate to multiple rows in Table B, but each row in Table B relates to only one row in Table A.
+
+    Example:
+
+        Customers table (customer_id, name)
+
+        Orders table (order_id, customer_id, total_amount)
+
+        One customer can have many orders.
+
+    Implementation: Foreign key in the child table points to the parent table’s primary key.
+
+c) Many-to-Many (M:N)
+
+    Definition: Multiple rows in Table A can relate to multiple rows in Table B.
+
+    Example:
+
+        Students table (student_id, name)
+
+        Courses table (course_id, course_name)
+
+        A student can take many courses, and a course can have many students.
+
+    Implementation: Requires a junction table (bridge table).
+
+        Example: StudentCourses (student_id, course_id)
+
+2. Keys in Relationships
+
+    Primary Key (PK): Uniquely identifies a record in a table.
+
+    Foreign Key (FK): Points to a primary key in another table to establish the relationship.
+
+3. Referential Integrity
+
+    Ensures that a foreign key value must match an existing value in the referenced table or be NULL.
+
+    Controlled by ON DELETE and ON UPDATE actions:
+
+        CASCADE → Automatically delete/update child rows.
+
+        SET NULL → Set FK to NULL when parent is deleted.
+
+        RESTRICT/NO ACTION → Prevent deletion/update if child exists.
+
+4. Example in SQL
+
+-- One-to-Many Example
+CREATE TABLE Customers (
+    customer_id INT PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+CREATE TABLE Orders (
+    order_id INT PRIMARY KEY,
+    customer_id INT,
+    total_amount DECIMAL(10, 2),
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+        ON DELETE CASCADE
+);
+
+If you want, I can draw an ER diagram for all three relationship types so you can visually memorize them before your review.
+You said:
+Joins
+ChatGPT said:
+
+Alright, let’s break down Joins in RDBMS in a structured way so you can remember them easily for your review.
+Joins in SQL
+
+Joins are used to retrieve data from multiple tables based on related columns between them.
+They are built on the concept of relationships between tables (usually via primary key and foreign key).
+1. INNER JOIN
+
+    Definition: Returns only matching rows between two tables based on the join condition.
+
+    Diagram: Intersection of two sets.
+
+    Example:
+
+SELECT e.name, d.department_name
+FROM Employees e
+INNER JOIN Departments d
+ON e.department_id = d.id;
+
+    Result: Employees that belong to an existing department.
+
+2. LEFT JOIN (or LEFT OUTER JOIN)
+
+    Definition: Returns all rows from the left table, and matching rows from the right table. Non-matching rows from the right table become NULL.
+
+    Diagram: Entire left circle + intersection.
+
+    Example:
+
+SELECT e.name, d.department_name
+FROM Employees e
+LEFT JOIN Departments d
+ON e.department_id = d.id;
+
+    Result: All employees, even if they don’t belong to a department.
+
+3. RIGHT JOIN (or RIGHT OUTER JOIN)
+
+    Definition: Returns all rows from the right table, and matching rows from the left table. Non-matching rows from the left table become NULL.
+
+    Diagram: Entire right circle + intersection.
+
+    Example:
+
+SELECT e.name, d.department_name
+FROM Employees e
+RIGHT JOIN Departments d
+ON e.department_id = d.id;
+
+    Result: All departments, even if no employee is assigned.
+
+4. FULL JOIN (or FULL OUTER JOIN)
+
+    Definition: Returns all rows from both tables, with NULLs where no match is found.
+
+    Diagram: Union of both sets.
+
+    Example:
+
+SELECT e.name, d.department_name
+FROM Employees e
+FULL OUTER JOIN Departments d
+ON e.department_id = d.id;
+
+    Result: All employees and all departments, matched where possible.
+
+5. CROSS JOIN
+
+    Definition: Returns Cartesian product — every row of the first table combined with every row of the second table.
+
+    Example:
+
+SELECT e.name, d.department_name
+FROM Employees e
+CROSS JOIN Departments d;
+
+    Result: If Employees has 10 rows and Departments has 5 rows → 50 rows total.
+
+6. SELF JOIN
+
+    Definition: Joins a table to itself (often to represent hierarchical data).
+
+    Example:
+
+SELECT e.name AS Employee, m.name AS Manager
+FROM Employees e
+LEFT JOIN Employees m
+ON e.manager_id = m.id;
+
+    Result: Shows each employee with their manager's name.
+
+💡 Tip for Review:
+
+    INNER JOIN → only matches.
+
+    LEFT JOIN → all left + matches.
+
+    RIGHT JOIN → all right + matches.
+
+    FULL JOIN → everything.
+
+    CROSS JOIN → everything × everything.
+
+    SELF JOIN → table joins with itself.
+
+If you want, I can give you a Venn diagram chart of all joins so it’s easier to remember during the review. That would make them stick in your head instantly.
+You said:
+3-Schema architecture
+ChatGPT said:
+
+The 3-Schema Architecture is a framework proposed by the ANSI/SPARC (American National Standards Institute / Standards Planning and Requirements Committee) to describe how database systems should be organized in layers.
+
+Its goal is to separate the user’s view, the logical structure, and the physical storage of data — so changes in one layer don’t necessarily affect the others.
+Layers in the 3-Schema Architecture
+
+There are three levels:
+1️⃣ Internal Schema (Physical Level)
+
+    What it is: Describes how data is physically stored in the database.
+
+    Focus: Storage structure, file organization, indexes, access paths.
+
+    Who uses it: Database administrators (DBAs).
+
+    Example:
+
+        How a Customer table is stored on disk.
+
+        Whether the index is a B-tree or hash index.
+
+        Page size and file format.
+
+2️⃣ Conceptual Schema (Logical Level)
+
+    What it is: Describes the logical structure of the entire database — independent of physical details.
+
+    Focus: Entities, attributes, relationships, constraints.
+
+    Who uses it: Database designers.
+
+    Example:
+
+        Customer(customer_id, name, email, phone)
+
+        Relationship: Customer → Orders (One-to-Many).
+
+        Primary and foreign keys.
+
+3️⃣ External Schema (View Level)
+
+    What it is: Describes how individual users or applications see the data (user-specific views).
+
+    Focus: Security, personalization, restricted access.
+
+    Who uses it: Application developers, end users.
+
+    Example:
+
+        A sales rep only sees customers in their region.
+
+        A cashier’s view only shows Product Name and Price, not supplier details.
+
+Why it’s Important
+
+    Data Independence:
+
+        Logical Data Independence → Changes in the logical structure (conceptual schema) don’t affect external schemas.
+
+        Physical Data Independence → Changes in the physical storage (internal schema) don’t affect the logical schema.
+
+    Security → External schemas allow you to hide sensitive data.
+
+    Flexibility → You can optimize storage without changing application code.
+
+📌 Diagram
+
++-----------------+
+| External Schema |  ← User-specific Views
++-----------------+
+        ↑
++-----------------+
+| Conceptual      |  ← Logical Structure
+| Schema          |
++-----------------+
+        ↑
++-----------------+
+| Internal Schema |  ← Physical Storage
++-----------------+
+
+If you want, I can also give you real-life examples of how a schema change in one level doesn’t affect others — that’s usually what reviewers test in database interviews. Would you like me to prepare that?
+You said:
+Indexing
+ChatGPT said:
+
+Here’s a complete review guide on Indexing in databases, structured for clarity and exam/interview readiness:
+1. What is an Index?
+
+    An index is a data structure that improves the speed of data retrieval operations on a table at the cost of additional storage and maintenance overhead.
+
+    Think of it like the index of a book — you don’t read the whole book, you jump to the page you need.
+
+2. Why Use Indexes?
+
+    Faster SELECT queries (searching, filtering, sorting).
+
+    Helps in JOIN operations.
+
+    Speeds up GROUP BY and ORDER BY queries.
+
+    Reduces table scan overhead.
+
+3. Drawbacks
+
+    Consumes extra storage.
+
+    Slows down INSERT, UPDATE, DELETE because indexes need to be updated.
+
+    Over-indexing can reduce overall performance.
+
+4. Types of Indexes
+Index Type	Description	Notes / Example
+Single-Column Index	Created on one column	CREATE INDEX idx_name ON Students(name);
+Composite Index	Created on multiple columns	CREATE INDEX idx_name_age ON Students(name, age);
+Unique Index	Ensures column(s) are unique	Automatically created for PRIMARY KEY and UNIQUE constraints
+Clustered Index	Sorts physical table data based on the index	Usually one per table (often PK)
+Non-Clustered Index	Stores pointers to physical data, table remains unsorted	Can have multiple per table
+Full-Text Index	For searching text content in large text fields	MATCH(column) AGAINST('keyword') in MySQL
+Bitmap Index	Efficient for columns with low cardinality	Often used in data warehouses
+5. How Index Works
+
+    Database engine searches the index structure (B-Tree, Hash, or Bitmap).
+
+    Finds the location of data in the table.
+
+    Fetches the actual row from storage.
+
+    Example:
+
+SELECT * FROM Employees WHERE last_name = 'Smith';
+
+    If last_name is indexed → Database uses the index to jump directly to the matching rows.
+
+    If no index → Database performs a full table scan.
+
+6. When to Use Indexes
+
+    Columns used frequently in:
+
+        WHERE clauses
+
+        JOIN conditions
+
+        ORDER BY or GROUP BY
+
+    Columns with high selectivity (many unique values)
+
+    Avoid indexing columns with low selectivity or frequently updated columns.
+
+7. Quick Notes
+
+    Primary Key → automatically creates a unique clustered index in many RDBMSs.
+
+    Unique Constraint → creates a unique non-clustered index.
+
+    Indexes do not guarantee faster performance for every query — optimizer chooses when to use it.
+
+💡 Memory Tip:
+
+    Think of indexes like a table of contents in a book. It speeds up reading, but adding pages (INSERT/UPDATE) means updating the table of contents too.
+
+If you want, I can create a visual diagram showing clustered vs non-clustered indexes and how they speed up queries — it’s a very easy way to remember for your review.
+
+Do you want me to make that diagram?
+You said:
+Aggregate functions 
+ChatGPT said:
+
+Here’s a complete guide to Aggregate Functions in SQL — perfect for quick review and interviews:
+1. What are Aggregate Functions?
+
+    Aggregate functions perform a calculation on a set of values and return a single value.
+
+    They are commonly used with the GROUP BY clause to summarize data.
+
+2. Common Aggregate Functions
+Function	Description	Example
+COUNT()	Counts the number of rows (or non-NULL values)	SELECT COUNT(*) FROM Employees;
+SUM()	Returns the total sum of a numeric column	SELECT SUM(salary) FROM Employees;
+AVG()	Returns the average of a numeric column	SELECT AVG(salary) FROM Employees;
+MIN()	Returns the smallest value in a column	SELECT MIN(salary) FROM Employees;
+MAX()	Returns the largest value in a column	SELECT MAX(salary) FROM Employees;
+GROUP_CONCAT() / STRING_AGG()	Concatenates values from multiple rows into a single string	SELECT GROUP_CONCAT(name) FROM Employees;
+3. Using Aggregate Functions with GROUP BY
+
+    GROUP BY is used to group rows based on one or more columns. Aggregate functions then operate on each group.
+
+Example: Total salary per department
+
+SELECT department_id, SUM(salary) AS total_salary
+FROM Employees
+GROUP BY department_id;
+
+4. Using Aggregate Functions with HAVING
+
+    HAVING is used to filter groups (like WHERE, but for aggregates).
+
+Example: Departments with total salary > 100000
+
+SELECT department_id, SUM(salary) AS total_salary
+FROM Employees
+GROUP BY department_id
+HAVING SUM(salary) > 100000;
+
+5. Notes
+
+    Aggregate functions ignore NULLs (except COUNT(*) counts all rows).
+
+    They return a single value per group.
+
+    Often combined with ORDER BY to sort summarized results.
+
+💡 Memory Tip:
+
+    Think of aggregate functions as summary tools:
+
+    COUNT → how many
+
+    SUM → total
+
+    AVG → average
+
+    MIN → smallest
+
+    MAX → largest
+
+If you want, I can make a quick reference table showing aggregate functions with examples and outputs — it’s perfect for last-minute review.
+
+Do you want me to make that?
+You said:
+SQL queries
+ChatGPT said:
+
+Here’s a structured guide to SQL queries covering the most important types for your review.
+1. Basic Queries
+SELECT
+
+    Used to retrieve data from one or more tables.
+
+SELECT column1, column2
+FROM table_name;
+
+SELECT DISTINCT
+
+    Retrieves unique values only.
+
+SELECT DISTINCT department_id
+FROM Employees;
+
+2. Filtering Data
+WHERE
+
+    Filters rows based on conditions.
+
+SELECT name, salary
+FROM Employees
+WHERE salary > 50000;
+
+Operators in WHERE
+
+    Comparison: =, <>, >, <, >=, <=
+
+    Logical: AND, OR, NOT
+
+    Range & Membership: BETWEEN, IN
+
+    Pattern Matching: LIKE '%pattern%'
+
+3. Sorting Data
+ORDER BY
+
+    Sorts results by one or more columns.
+
+SELECT name, salary
+FROM Employees
+ORDER BY salary DESC, name ASC;
+
+4. Aggregate Queries
+
+    Summarize data using aggregate functions: COUNT, SUM, AVG, MIN, MAX.
+
+SELECT department_id, SUM(salary) AS total_salary
+FROM Employees
+GROUP BY department_id
+HAVING SUM(salary) > 100000;
+
+5. Joining Tables
+
+    Retrieve data from multiple tables based on relationships.
+
+Join Type	Example
+INNER JOIN	SELECT e.name, d.name FROM Employees e INNER JOIN Departments d ON e.department_id = d.id;
+LEFT JOIN	SELECT e.name, d.name FROM Employees e LEFT JOIN Departments d ON e.department_id = d.id;
+RIGHT JOIN	SELECT e.name, d.name FROM Employees e RIGHT JOIN Departments d ON e.department_id = d.id;
+FULL JOIN	SELECT e.name, d.name FROM Employees e FULL OUTER JOIN Departments d ON e.department_id = d.id;
+CROSS JOIN	SELECT e.name, d.name FROM Employees e CROSS JOIN Departments d;
+6. Subqueries
+
+    Queries inside other queries.
+
+SELECT name
+FROM Employees
+WHERE salary > (SELECT AVG(salary) FROM Employees);
+
+7. Data Modification Queries
+INSERT
+
+INSERT INTO Employees (id, name, salary)
+VALUES (1, 'John', 50000);
+
+UPDATE
+
+UPDATE Employees
+SET salary = salary * 1.1
+WHERE department_id = 101;
+
+DELETE
+
+DELETE FROM Employees
+WHERE salary < 20000;
+
+8. Table Management
+CREATE TABLE
+
+CREATE TABLE Employees (
+    id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    salary DECIMAL(10,2)
+);
+
+ALTER TABLE
+
+ALTER TABLE Employees ADD COLUMN department_id INT;
+
+DROP TABLE
+
+DROP TABLE Employees;
+
+9. Views
+
+    Virtual tables based on queries.
+
+CREATE VIEW HighSalaryEmployees AS
+SELECT name, salary
+FROM Employees
+WHERE salary > 70000;
+
+10. Transactions
+
+    Ensure ACID properties:
+
+BEGIN TRANSACTION;
+
+UPDATE Accounts SET balance = balance - 500 WHERE id = 1;
+UPDATE Accounts SET balance = balance + 500 WHERE id = 2;
+
+COMMIT; -- or ROLLBACK on error
+
+💡 Tip for Review:
+
+    SELECT → WHERE → GROUP BY → HAVING → ORDER BY → LIMIT is the logical order of SQL query processing.
+
+    Always check joins and aggregate functions usage in complex queries.
+
+If you want, I can make a single-page cheat sheet of all SQL query types with examples — perfect for quick revision before your review.
+
+Do you want me to make that?
+You said:
+DDL
+ChatGPT said:
+
+Here’s a structured guide on DDL (Data Definition Language) for your database review:
+1. What is DDL?
+
+    DDL (Data Definition Language) is a subset of SQL used to define, modify, or remove database structures such as tables, indexes, and schemas.
+
+    DDL commands affect the database schema, not the data itself.
+
+    DDL commands are auto-committed in most RDBMS (changes are permanent immediately).
+
+2. Common DDL Commands
+Command	Purpose	Example
+CREATE	Create a new database object (table, index, view)	CREATE TABLE Employees (id INT PRIMARY KEY, name VARCHAR(50), salary DECIMAL(10,2));
+ALTER	Modify an existing database object	ALTER TABLE Employees ADD COLUMN department_id INT;
+DROP	Delete an existing database object	DROP TABLE Employees;
+TRUNCATE	Remove all rows from a table (faster than DELETE)	TRUNCATE TABLE Employees;
+RENAME	Rename a database object	ALTER TABLE Employees RENAME TO Staff;
+3. Key Notes
+
+    CREATE → Define schema structure.
+
+    ALTER → Modify structure without losing data (add/remove columns, change datatype).
+
+    DROP → Deletes structure permanently along with data.
+
+    TRUNCATE → Deletes all data but keeps table structure intact.
+
+    DDL changes cannot be rolled back in most systems unless inside a transaction (some databases like PostgreSQL support transactional DDL).
+
+
+
+
+
+
+
+1. What is DML?
+        (data)
+    DML is a subset of SQL used to manipulate data inside existing database objects (usually tables).
+
+    Unlike DDL, DML changes data, not structure.
+
+    DML operations can be rolled back if inside a transaction.
+
+2. Common DML Commands
+Command	Purpose	Example
+SELECT	Retrieve data from tables	SELECT name, salary FROM Employees WHERE salary > 50000;
+INSERT	Add new records into a table	INSERT INTO Employees (id, name, salary) VALUES (1, 'John', 50000);
+UPDATE	Modify existing records	UPDATE Employees SET salary = salary * 1.1 WHERE department_id = 101;
+DELETE	Remove records from a table	DELETE FROM Employees WHERE salary < 20000;
+3. Key Notes
+
+    SELECT is sometimes considered a read-only DML command.
+
+    Changes made with INSERT, UPDATE, and DELETE can be rolled back with ROLLBACK if not committed yet.
+
+    Always use WHERE in UPDATE and DELETE to avoid modifying/deleting all rows unintentionally.
+
+
+
+
+1. What is DQL?
+
+            (read)
+
+    DQL is a subset of SQL used only to retrieve data from the database.
+
+    It does not modify data or structure — it’s purely for querying.
+
+    In most classifications, DQL has only one command: SELECT.
+
+    💡 Memory Tip:
+
+    Think of DQL as asking questions to the database, and DML as making changes to it.
+
+
+
+
+1. What is DCL?
+        (permissions)
+    DCL is a subset of SQL used to control access and permissions on the database.
+
+    It defines who can do what with the database objects.
+
+    Mainly used by DBAs (Database Administrators).
+
+    2. Main DCL Commands
+        | Command    | Purpose                           | Example                                       |
+| ---------- | --------------------------------- | --------------------------------------------- |
+| **GRANT**  | Gives a user specific permissions | `GRANT SELECT, INSERT ON Employees TO user1;` |
+| **REVOKE** | Removes permissions from a user   | `REVOKE INSERT ON Employees FROM user1;`      |
+
+4. Key Notes
+
+    Permissions can be given on specific tables, views, or entire databases.
+
+    Some RDBMS also have:
+
+        DENY (SQL Server) → Explicitly block an action.
+
+        GRANT OPTION → Allows a user to give the granted permission to others.
+
+    DCL statements usually need an admin role to execute.
+
+
+
+1. What is TCL?
+
+    TCL is a subset of SQL used to manage transactions in a database.
+
+    Transactions are sequences of one or more SQL statements that are executed as a single unit.
+
+    Ensures ACID properties (Atomicity, Consistency, Isolation, Durability).
+
+    2. Main TCL Commands
+
+        | Command             | Purpose                                                                 | Example                      |
+| ------------------- | ----------------------------------------------------------------------- | ---------------------------- |
+| **COMMIT**          | Save all changes made in the current transaction                        | `COMMIT;`                    |
+| **ROLLBACK**        | Undo all changes since the last COMMIT or SAVEPOINT                     | `ROLLBACK;`                  |
+| **SAVEPOINT**       | Set a checkpoint to roll back to without undoing the entire transaction | `SAVEPOINT sp1;`             |
+| **ROLLBACK TO**     | Roll back to a specific SAVEPOINT                                       | `ROLLBACK TO sp1;`           |
+| **SET TRANSACTION** | Define properties for the current transaction (e.g., isolation level)   | `SET TRANSACTION READ ONLY;` |
+
+
+    💡 Memory Tip:
+        TCL is like a video game save system:
+                SAVEPOINT = Save game checkpoint
+                ROLLBACK TO = Reload from checkpoint
+                COMMIT = Finish the game and save results permanently
