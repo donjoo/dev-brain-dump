@@ -1,0 +1,92 @@
+
+https://neon.com/postgresql/postgresql-tutorial/
+
+
+
+
+SELECT
+    Use the SELECT ... FROM statement to retrieve data from a table.
+    PostgreSQL evaluates the FROM clause before the SELECT clause.
+    Use a column alias to assign a temporary name to a column or an expression in a query.
+    In PostgreSQL, the FROM clause is optional.
+
+-------------------------
+
+Column Alias
+        A column alias allows you to assign a column or an expression in the select 
+        list of a SELECT statement a temporary name. The column alias exists temporarily 
+        during the execution of the query.
+                    SELECT column_name alias_name FROM table_name;
+                    SELECT expression AS alias_name FROM table_name;
+                    select first_name , last_name "sur name" from customer;
+
+---------------------------
+
+ORDER BY clause
+        When you query data from a table, the SELECT statement returns rows in an unspecified 
+        order. To sort the rows of the result set, you use the ORDER BY clause in the SELECT 
+        statement.
+
+
+
+            SELECT first_name , last_name FROM customer ORDER BY first_name ASC;
+            SELECT first_name , last_name from customer ORDER BY first_name ASC, last_name DeSC;
+
+
+
+            The following statement selects the first names and their lengths.
+             It sorts the rows by the lengths of the first names:
+                 SELECT first_name , LENGTH(first_name) len from customer ORDER BY Len DESC;
+
+
+            To place NULL before other non-null values, you use the NULLS FIRST option:
+            SELECT num FROM sort_demo ORDER BY num NULLS FIRST;
+
+
+    Use the ORDER BY clause in the SELECT statement to sort the rows in the query set.
+    Use the ASC option to sort rows in ascending order and DESC option to sort rows in descending order.
+    The ORDER BY clause uses the ASC option by default.
+    Use NULLS FIRST and NULLS LAST options to explicitly specify the order of NULL with other non-null values.
+
+-----------------------
+
+
+
+SELECT DISTINCT
+
+        The SELECT DISTINCT removes duplicate rows from a result set. The SELECT DISTINCT clause 
+        retains one row for each group of duplicates.
+
+        The SELECT DISTINCT clause can be applied to one or more columns in the select list of 
+        the SELECT statement.
+
+
+            SELECT DISTINCT rental_rate from film order by rental_rate
+
+
+
+WHERE
+        The SELECT statement returns all rows from one or more columns in a table. 
+        To retrieve rows that satisfy a specified condition, you use a WHERE clause.
+
+        PostgreSQL evaluates the WHERE clause after the FROM clause but before the 
+        SELECT and ORDER BY clause:
+
+        SELECT first_name, last_name FROM customer WHERE first_name = 'Jamie' AND last_name = 'Rice';
+
+
+
+        To find a string that matches a specified pattern, you use the LIKE operator.
+                        SELECT  first_name, last_name FROM customer WHERE  first_name LIKE 'Ann%';
+
+
+        The BETWEEN operator returns true if a value is in a range of values.
+                select first_name , LENGTH(first_name) name_length from customer where first_name LIKE 'A%' and LENGTH(first_name) BETWEEN 3 AND 5 order by name_length;
+
+
+
+Fetch
+        select film_id , title from film order by title OFFSET 5 ROWS FETCH FIRST 6 row only;
+
+IN 
+        The IN operator allows you to check whether a value matches any value in a list of values.

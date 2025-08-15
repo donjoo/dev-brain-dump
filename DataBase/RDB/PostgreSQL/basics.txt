@@ -1,0 +1,16 @@
+PostgreSQL is an advanced, enterprise-class, and open-source relational 
+database system. PostgreSQL supports both SQL (relational) and JSON 
+(non-relational) querying.
+
+
+PostgreSQL is used as a primary database for many web applications as 
+well as mobile and analytics applications.
+
+Common Use Cases of PostgreSQL
+
+                A robust database in the LAPP stack
+                            ~LAPP stands for Linux, Apache, PostgreSQL, and PHP 
+                2) General-purpose transaction database
+                3) Geospatial database
+                        PostgreSQL with the PostGIS extension
+                        supports geospatial databases 
