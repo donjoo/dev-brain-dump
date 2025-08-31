@@ -1,0 +1,43 @@
+🔹 1. What is ORM?
+
+ORM (Object Relational Mapper) is a technique that allows you to interact with the database using 
+Python code instead of writing raw SQL queries.
+
+In Django, ORM translates Python models (classes) into database tables.
+
+This makes your code:
+
+Database-agnostic → you can switch between PostgreSQL, MySQL, SQLite, etc. without changing your 
+Python code.
+
+Easier to maintain → less SQL, more Python.
+
+
+
+🔹 4. makemigrations & migrate
+
+When you create or update models, you must tell Django to update the database.
+
+Step 1: makemigrations
+
+Detects changes in models.py
+
+Creates migration files (instructions for database changes).
+
+
+
+
+                ORM lets you use Python classes instead of SQL queries.
+
+                Models = database tables.
+
+                Fields = table columns (with different types).
+
+                makemigrations = prepare instructions.
+
+                migrate = apply to database.
+
+    
+Step 2: migrate
+
+Applies those migrations (changes) to the actual database.
