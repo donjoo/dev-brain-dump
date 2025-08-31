@@ -32,7 +32,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
-    is_staff = models.BoolenField(default=False)
+    is_staff = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 
@@ -43,7 +43,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 #Abstract base classes
 
-class CommmonInfo(models.Model):
+class CommonInfo(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -53,7 +53,7 @@ class CommmonInfo(models.Model):
 
 class Student(CommmonInfo):
     name = models.CharField(max_length=100)
-    grade = models.IntergerField()
+    grade = models.IntegerField()
 
 
 
@@ -92,10 +92,10 @@ class PublishedManager(models.Manager):
         return super().get_queryset().filter(status='published')
 
 class BlogPost(models.Model):
-    title = model.CharField(max_length=100)
+    title = models.CharField(max_length=100)
     status = models.CharField(max_length=10)
 
-    objects = models.manager()
+    objects = models.Manager()
 
     published = PublishedManager()
 
