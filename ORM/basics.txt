@@ -41,3 +41,12 @@ Creates migration files (instructions for database changes).
 Step 2: migrate
 
 Applies those migrations (changes) to the actual database.
+
+
+🔹 Difference Between annotate and aggregate
+
+annotate → works per row (adds extra fields to each object).
+Example: Course + Count of students per course.
+
+aggregate → works on the whole queryset (returns a summary dict).
+Example: Average marks of all students.
