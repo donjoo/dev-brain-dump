@@ -182,12 +182,12 @@ Example:
 Cookie: sessionid=abc123; csrftoken=xyz456
 
 🧠 Cheat Table for Review
-Part	What It Is	Example
-Request Line	Method + URL + HTTP Version	GET /api/users/ HTTP/1.1
-Headers	Meta info (auth, content-type)	Authorization: Bearer <token>
-Body	Payload (POST/PUT/PATCH)	{"name": "Don"}
-Query Params	Extra data in URL	?page=1&search=don
-Cookies	Stored client-side values	Cookie: sessionid=xyz
+Part	            What It Is	                                Example
+Request Line	    Method + URL + HTTP Version	                GET /api/users/ HTTP/1.1
+Headers	            Meta info (auth, content-type)	            Authorization: Bearer <token>
+Body	            Payload (POST/PUT/PATCH)	                {"name": "Don"}
+Query Params	    Extra data in URL	                        ?page=1&search=don
+Cookies	            Stored client-side values	                Cookie: sessionid=xyz
 
 If you’re explaining in an interview/viva:
 
@@ -233,7 +233,7 @@ Content-Length: 123
 
 🧩 Parts of the HTTP Response:
 Part	Example	Description
-Status Line	HTTP/1.1 200 OK	Protocol + status code + status message
+Status Line	HTTP/1.1 200 OK	 Protocol + status code + status message
 Headers	Content-Type, Set-Cookie, etc.	Metadata about the response
 Body	JSON response {...}	Actual data/content sent by server
 
@@ -252,6 +252,8 @@ These mean: “I received your request, still processing.”
 Code	Meaning	Example Use Case
 100	Continue	Browser sends more request body
 101	Switching Protocols	WebSockets upgrade request
+
+
 ✅ 2xx – Success
 
 These mean: “Your request was successfully received, understood, and accepted.”
@@ -260,6 +262,9 @@ Code	Meaning	Example Use Case
 201	Created	Resource created (e.g., new user signup)
 202	Accepted	Async request accepted, not completed
 204	No Content	Successful, but no body (e.g., DELETE)
+
+
+
 ❗ 3xx – Redirection
 
 These mean: “You need to do something else to complete the request.”
@@ -277,6 +282,8 @@ Code	Meaning	Example Use Case
 404	Not Found	Resource doesn’t exist
 405	Method Not Allowed	Using wrong HTTP method (e.g., PUT on GET)
 409	Conflict	Duplicate resource (e.g., email already used)
+
+
 🔥 5xx – Server Error
 
 These mean: “The server messed up.”
@@ -296,7 +303,9 @@ Code	Meaning	Example Use Case
 
 🔍 What are Query Parameters in HTTP?
 
-Query parameters (also called query strings) are key-value pairs added to the end of a URL to pass data to the server (usually during a GET request).
+Query parameters (also called query strings) are key-value pairs 
+added to the end of a URL to pass data to the server (usually 
+during a GET request).
 💡 Format:
 
 https://example.com/api/users?age=20&active=true

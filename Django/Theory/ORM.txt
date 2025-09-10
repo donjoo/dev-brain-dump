@@ -2,12 +2,17 @@
 
 ORM stands for Object-Relational Mapping.
 
-It’s a programming technique that lets you interact with a database using objects (Python classes) instead of writing raw SQL queries.
+It’s a programming technique that lets you interact with a database using objects (Python classes) 
+instead of writing raw SQL queries.
 🔹 In Django:
 
-Django’s ORM lets you define models (Python classes), and it automatically generates the SQL behind the scenes to create tables, insert, update, delete, and query data.
+Django’s ORM lets you define models (Python classes), and it automatically generates 
+the SQL behind the scenes to create tables, insert, update, delete, and query data.
 
 
+It’s a programming technique that lets you interact with a database using objects 
+(Python classes) instead of writing raw SQL queries.
+🔹 In Django:
 
 🧠 Abstraction	You don’t need to write SQL — just use Python code
 🚀 Faster development	Easy to create, read, update, and delete (CRUD) data
@@ -18,4 +23,6 @@ Django’s ORM lets you define models (Python classes), and it automatically gen
 🤝 Relationships	Easily define foreign keys, one-to-many, many-to-many relationships
 ✅ Summary Line (for viva):
 
-    “Django ORM allows you to interact with the database using Python code instead of SQL. It improves development speed, reduces errors, and handles security like SQL injection for you. It also makes your code portable across databases.”
+    “Django ORM allows you to interact with the database using Python code instead of SQL. 
+    It improves development speed, reduces errors, and handles security like SQL injection 
+    for you. It also makes your code portable across databases.”

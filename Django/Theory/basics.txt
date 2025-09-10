@@ -129,7 +129,8 @@ The manage.py file is a command-line utility that lets you interact with your Dj
 
 
 🌐 What is a Web Server?
-A web server is software (and sometimes hardware) that handles HTTP requests from clients (usually browsers) and serves web content (like HTML pages, images, or APIs) in response.
+A web server is software (and sometimes hardware) that handles HTTP requests from clients (usually browsers) 
+and serves web content (like HTML pages, images, or APIs) in response.
 
 
 🌐 What is an API?
@@ -147,13 +148,13 @@ Example URL:
 
 https://www.example.com:443/blog/posts/1?sort=latest#comments
 
-Part	Example	Description
-Scheme	https	Protocol used (http, https, ftp, etc.)
-Host (Domain)	www.example.com	Domain name of the server
-Port	443	Optional. Default: 80 (HTTP), 443 (HTTPS)
-Path	/blog/posts/1	Specific location/resource on the server
-Query String	?sort=latest	Key-value pairs for parameters (optional)
-Fragment	#comments	Jumps to a specific section (optional)
+Part	            Example         	        Description
+Scheme	            https	                Protocol used (http, https, ftp, etc.)
+Host (Domain)	    www.example.com	        Domain name of the server
+Port	            443	Optional.           Default: 80 (HTTP), 443 (HTTPS)
+Path	            /blog/posts/1	        Specific location/resource on the server
+Query String	    ?sort=latest	        Key-value pairs for parameters (optional)
+Fragment	        #comments	            Jumps to a specific section (optional)
 
 
 🔹 Path Parameters (also called URL Parameters)
@@ -166,7 +167,8 @@ These are key-value pairs passed after the ? in a URL. They are used to filter, 
 
 
 ⚙️ Django Context Processors – Making Data Available Everywhere
-Context processors in Django are functions that inject variables into the context of all templates automatically, without you having to pass them from every view.
+Context processors in Django are functions that inject variables into the context of all templates automatically, 
+without you having to pass them from every view.
 
 
 
@@ -174,10 +176,10 @@ Context processors in Django are functions that inject variables into the contex
 A socket is a low-level communication endpoint that allows two programs (or devices) to 
 send and receive data over a network (like the Internet).
 🔁 Types of Sockets
-Type	Used For	Example Framework
-TCP Socket	Reliable, ordered data transfer	HTTP, HTTPS
-UDP Socket	Faster, but no guarantee/order	Streaming, games
-WebSocket	Persistent 2-way connection	Chat apps, live updates (used in Django Channels, etc.)
+Type	            Used For	                                                Example Framework
+TCP Socket	        Reliable, ordered data transfer	                                HTTP, HTTPS
+UDP Socket	        Faster, but no guarantee/order	                                Streaming, games
+WebSocket	        Persistent 2-way connection	Chat apps, live updates         (used in Django Channels, etc.)
 
 
 🔐 ALLOWED_HOSTS (Django setting)
@@ -196,7 +198,8 @@ WebSocket	Persistent 2-way connection	Chat apps, live updates (used in Django Ch
 ✅ What is CSRF?
 
 CSRF stands for Cross-Site Request Forgery.
-    A CSRF attack tricks a logged-in user into making an unwanted request (like transferring money or changing email) from another site.
+    A CSRF attack tricks a logged-in user into making an unwanted request (like transferring money or changing email) 
+    from another site.
 
 
 🔑 What is the SECRET_KEY in Django?
@@ -225,23 +228,24 @@ It's a way for the browser to store data on the user's device, using:
 
     ✅ Session Storage
 
-These are key-value stores available via JavaScript (window.localStorage and window.sessionStorage), and not sent with HTTP requests (unlike cookies).
+These are key-value stores available via JavaScript (window.localStorage and 
+window.sessionStorage), and not sent with HTTP requests (unlike cookies).
 
 🗃️ 2. Local Storage
-Feature	Detail
-Scope	Domain-wide (same origin only)
-Persistence	Persists even after browser/tab is closed
-Max Size	~5–10 MB per domain
-Accessed via	window.localStorage
+Feature     	            Detail
+Scope	            Domain-wide (same origin only)
+Persistence	        Persists even after browser/tab is closed
+Max Size	        ~5–10 MB per domain
+Accessed via	    window.localStorage
 Example Use Case	Saving user theme, language preference, tokens (not recommended for sensitive info)
 
 
 🕓 3. Session Storage
-Feature	Detail
-Scope	Domain + tab
-Persistence	Cleared when tab or browser is closed
-Max Size	~5 MB per domain
-Accessed via	window.sessionStorage
+Feature	            Detail
+Scope	            Domain + tab
+Persistence	        Cleared when tab or browser is closed
+Max Size	        ~5 MB per domain
+Accessed via	     window.sessionStorage
 Example Use Case	Temp data like form progress, search filters
 
 
@@ -273,7 +277,10 @@ Example Use Case	Temp data like form progress, search filters
 
 🛫 What is a Preflight Request?
 
-A Preflight request is a CORS mechanism used by the browser to check with the server if it's safe to send the actual request, especially when that request might affect server data (e.g., POST, PUT, DELETE) or uses custom headers.
+A Preflight request is a CORS mechanism used by the browser to check with the server 
+if it's safe to send the actual request, especially when that request might affect 
+server data (e.g., POST, PUT, DELETE) or uses custom headers.
+
 🔍 When does it happen?
 
 A preflight request is automatically sent by the browser when:
@@ -301,7 +308,8 @@ If allowed, the actual request is sent.
 
 🔔 Django Signals — Explained Simply
 
-Signals in Django are like event listeners. They allow different parts of your app to respond to events (like saving a model) without tightly coupling code.
+Signals in Django are like event listeners. They allow different parts of your app to respond to events 
+(like saving a model) without tightly coupling code.
 
 
 

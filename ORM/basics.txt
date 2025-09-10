@@ -50,3 +50,60 @@ Example: Course + Count of students per course.
 
 aggregate → works on the whole queryset (returns a summary dict).
 Example: Average marks of all students.
+
+
+
+
+
+
+
+
+
+
+
+1. select_related
+
+Used for: ForeignKey and OneToOneField relationships.
+
+How it works: Performs an SQL JOIN and fetches related objects in a single query.
+
+When to use: If you’re going to access a related object (one-to-one or many-to-one) 
+multiple times, use select_related to avoid hitting the database repeatedly.
+
+
+            # Query without select_related
+            books = Book.objects.all()
+            for book in books:
+                print(book.title, book.author.name)  # Each author.name hits DB again!
+
+            # Query with select_related
+            books = Book.objects.select_related("author")
+            for book in books:
+                print(book.title, book.author.name)  # Author fetched in the same query
+
+        
+
+2. prefetch_related
+
+Used for: ManyToManyField and reverse ForeignKey (one-to-many).
+
+How it works: Executes two queries — one for the main objects, and one for the related objects — then joins them in Python memory.
+
+When to use: If you’re accessing reverse or many-to-many relationships.
+
+
+
+                # Query without prefetch_related
+                courses = Course.objects.all()
+                for course in courses:
+                    print(course.name, [s.name for s in course.students.all()])
+                    # Each students.all() hits DB again!
+
+                # Query with prefetch_related
+                courses = Course.objects.prefetch_related("students")
+                for course in courses:
+                    print(course.name, [s.name for s in course.students.all()])
+
+
+A signal is a messaging system in Django that allows different pieces of code 
+to get notified when certain actions occur (like saving a model, deleting a record, or user logging in).

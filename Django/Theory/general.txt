@@ -69,7 +69,8 @@ with models if needed, then renders a template and sends back an HttpResponse.�
 
 ✅ What is a Template Engine?
 A template engine is a system that combines HTML with dynamic data to produce final web pages.
-“A template engine lets us mix HTML with dynamic content using a special syntax. In Django, the template engine takes data from the view and renders it into HTML using placeholders, loops, and conditions.”
+“A template engine lets us mix HTML with dynamic content using a special syntax. In Django, 
+the template engine takes data from the view and renders it into HTML using placeholders, loops, and conditions.”
 
 ✨ Jinja Template Engine – The One Django Uses Behind the Scenes
 Jinja2 is a modern templating engine for Python, used by Flask and also used by Django's template engine (inspired by Jinja syntax).
