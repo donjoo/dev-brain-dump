@@ -1,0 +1,508 @@
+
+
+
+
+
+
+
+
+
+
+2. The TLS Handshake Process (Simplified)
+
+Let's say your browser connects to https://example.com.
+
+Step 1: Server Sends Public Key
+
+The server sends:
+
+Its public key inside an SSL/TLS certificate.
+
+Browser verifies the certificate using a trusted Certificate Authority (CA).
+
+Public key is safe to share — anyone can have it.
+
+Step 2: Browser Creates a Session Key
+
+The browser generates a random symmetric key (e.g., for AES encryption).
+
+Step 3: Browser Encrypts Session Key with RSA
+
+Browser encrypts the session key using the server's public key:
+
+EncryptedKey=(SessionKey)emod  n
+EncryptedKey=(SessionKey)
+e
+modn
+
+Only the server's private key can decrypt this.
+
+Browser sends this encrypted session key to the server.
+
+Step 4: Server Decrypts Using Private Key
+
+The server uses its private key to decrypt the session key:
+
+SessionKey=(EncryptedKey)dmod  n
+SessionKey=(EncryptedKey)
+d
+modn
+
+Now both browser and server have the same session key, but nobody else knows it.
+
+Step 5: Symmetric Encryption Starts
+
+From now on:
+
+Both browser and server use the same session key (AES) for all communication.
+
+This means:
+
+Browser encrypts requests (like login data) with AES.
+
+Server decrypts requests with the same AES key.
+
+Server encrypts responses with AES.
+
+Browser decrypts responses with the same AES key.
+
+AES is fast, making it ideal for bulk data.
+
+
+
+
+
+1. Web Server vs Application Server — Core Difference
+
+| **Aspect**            | **Web Server**                                                                   | **Application Server**                                                          |
+| --------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| **Primary Role**      | Handles **HTTP requests** and serves **static content** (HTML, CSS, JS, images). | Runs **business logic**, processes requests, and generates **dynamic content**. |
+| **Content Type**      | Mostly **static content**                                                        | Mostly **dynamic content**                                                      |
+| **Language Support**  | Limited — mainly focuses on HTTP                                                 | Supports multiple languages and frameworks (Python, Java, etc.)                 |
+| **Examples**          | **Nginx**, **Apache HTTP Server**, **Caddy**                                     | **Gunicorn**, **Uvicorn**, **Tomcat**, **Django runserver**                     |
+| **Performance**       | Very fast at serving files because it does not execute code.                     | Slightly slower because it runs complex logic before responding.                |
+| **Security Features** | SSL/TLS termination, request routing, caching, load balancing                    | Authentication, authorization, data validation                                  |
+| **Typical Placement** | **Front-facing**, directly exposed to the internet                               | **Behind the web server**, not directly exposed to users                        |
+
+
+
+
+
+
+
+##### *****Designing scalable APIs *****************
+
+
+
+Designing scalable APIs is about creating APIs that can handle growth gracefully 
+— growth in users, data, traffic, and complexity — without degrading performance 
+or requiring complete rewrites.
+
+Let's go step-by-step and cover architecture, design principles, and scaling techniques.
+
+
+
+Scalability is the ability of your API to handle increasing demand while maintaining 
+performance, reliability, and cost-efficiency.
+
+Key Scaling Dimensions:
+
+            | **Type of Scale**   | **Example**                                          |
+| ------------------- | ---------------------------------------------------- |
+| **Traffic Scaling** | 10 → 10,000 requests per second                      |
+| **Data Scaling**    | 1 GB → 10 TB of data                                 |
+| **Team Scaling**    | 2 developers → 20 developers working on the same API |
+| **Feature Scaling** | Adding more endpoints and services                   |
+
+
+
+2. Core Principles for Designing Scalable APIs
+
+    | **Principle**                  | **Why It Matters**                                                     |
+| ------------------------------ | ---------------------------------------------------------------------- |
+| **Statelessness**              | Allows horizontal scaling by not tying a request to a specific server. |
+| **Consistency in Design**      | Easier for clients to consume and reduces errors.                      |
+| **Separation of Concerns**     | Decouple business logic, database, and presentation layers.            |
+| **Caching**                    | Reduce repeated expensive operations.                                  |
+| **Asynchronous Processing**    | Offload heavy tasks to background workers.                             |
+| **Security and Rate Limiting** | Prevent abuse and ensure fair usage.                                   |
+| **Monitoring & Observability** | Detect issues before they affect users.                                |
+
+
+
+
+3. API Architecture Choices
+A. REST API
+
+Standard HTTP verbs (GET, POST, PUT, DELETE).
+
+Simple, widely understood.
+
+Good for many use cases.
+
+B. GraphQL
+
+Clients specify exactly what data they need.
+
+Reduces over-fetching and under-fetching.
+
+Useful for complex, client-driven UIs.
+
+
+C. gRPC
+
+Binary protocol → faster than JSON.
+
+Ideal for microservices communication.
+
+Supports streaming data.
+
+Example use case: Real-time chat, IoT.
+
+
+
+
+| **Area**                 | **Good Practice**                                                         |
+| ------------------------ | ------------------------------------------------------------------------- |
+| **Pagination**           | Avoid `GET /users` returning millions of records. Use `?page=2&limit=50`. |
+| **Versioning**           | `/api/v1/users` to allow backward compatibility.                          |
+| **Filtering & Sorting**  | `/api/v1/users?status=active&sort=created_at`                             |
+| **Error Handling**       | Return structured JSON errors with HTTP codes.                            |
+| **Rate Limiting**        | Prevent abuse with per-IP or per-user limits.                             |
+| **Consistent Responses** | Always return JSON with standard fields like `status`, `message`, `data`. |
+
+
+
+
+
+
+6. Database Scaling
+
+| **Technique**     | **Use Case**                                                                 |
+| ----------------- | ---------------------------------------------------------------------------- |
+| **Indexing**      | Speed up reads on large tables.                                              |
+| **Read Replicas** | Separate read traffic from write traffic.                                    |
+| **Sharding**      | Split data across multiple databases when a single DB can't handle the load. |
+| **Caching Layer** | Use Redis or Memcached to avoid hitting DB for frequently accessed data.     |
+
+
+
+
+Browser → DNS → CDN → Load Balancer → Web Server → Cache → DB → Cache update → Queue → Worker → Monitoring
+
+
+Core building blocks
+
+| Layer           | Technology Examples      | Purpose                               |
+| --------------- | ------------------------ | ------------------------------------- |
+| Client          | Browser, iOS, Android    | UI, user interaction                  |
+| CDN             | Cloudflare, Akamai       | Static asset caching, DDoS protection |
+| Load Balancer   | Nginx, AWS ELB           | Distribute traffic                    |
+| Web Server      | Django, Node.js, Express | Business logic                        |
+| Cache           | Redis, Memcached         | Reduce DB load                        |
+| Database        | PostgreSQL, MongoDB      | Persistent storage                    |
+| Message Queue   | Kafka, RabbitMQ          | Async processing                      |
+| Monitoring/Logs | Prometheus, Grafana, ELK | Observability                         |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+User (Browser / Mobile App)
+   |
+   v
+DNS → CDN → Load Balancer → Web Server / App Server → Cache → Database
+   |
+   +→ Async Queue (for background tasks)
+   |
+   +→ Analytics / Monitoring / Logging
+
+
+
+2. Step-by-step explanation
+
+Let's go through each step in detail.
+
+Step 1: Client Side
+
+Actors: Browser (Chrome, Firefox, etc.) or Mobile app
+
+The user types https://myshop.com or taps a button in a mobile app.
+
+The browser builds an HTTP request:
+
+URL
+
+Method (GET, POST, etc.)
+
+Headers (cookies, auth token, content-type)
+
+Body (if applicable, like form data or JSON)
+
+Example request:
+
+
+
+        GET /products?category=shoes HTTP/1.1
+Host: myshop.com
+User-Agent: Mozilla/5.0
+Accept: application/json
+Authorization: Bearer <jwt-token>
+
+    System design perspective:
+
+Ensure secure communication → HTTPS (TLS encryption).
+
+Optimize payload → compress using gzip, minify JSON, send only needed data.
+
+
+
+
+Step 2: DNS Resolution
+
+Goal: Convert domain (myshop.com) → IP address (192.168.1.100)
+
+Browser checks local cache, then OS cache, then DNS resolver.
+
+DNS resolver may hit:
+
+Root server → .com TLD → authoritative name server for myshop.com.
+
+Optimizations:
+
+Use DNS caching to reduce latency.
+
+DNS TTL tuning for balancing between performance and flexibility.
+
+Example services: Cloudflare DNS, Route53.
+
+Step 3: CDN (Content Delivery Network)
+
+Purpose: Serve static files from edge locations close to users.
+
+Things like images, CSS, JS, videos are cached globally.
+
+Reduces latency and origin server load.
+
+System design perspective:
+
+Use cache invalidation strategies (versioning static files, e.g., style.v2.css).
+
+CDN helps prevent DDoS by absorbing massive traffic.
+
+Step 4: Load Balancer
+
+Purpose: Distribute traffic across multiple servers.
+
+Types:
+
+Layer 4 (Transport level) → works with IP/port (TCP/UDP).
+
+Layer 7 (Application level) → works with HTTP headers, cookies, etc.
+
+Key responsibilities:
+
+Evenly spread requests (Round-robin, least-connections, weighted).
+
+Health checks → stop sending traffic to failed servers.
+
+SSL termination → offload encryption work from app servers.
+
+Example tools:
+
+AWS ELB / ALB, Nginx, HAProxy.
+
+Step 5: Web / Application Server
+
+Where your backend code runs.
+
+Handles business logic:
+
+User authentication
+
+Processing payments
+
+Applying discounts
+
+Validating data
+
+Querying database
+
+Example stack:
+
+Python + Django
+
+Node.js + Express
+
+Java + Spring Boot
+
+Scaling strategies:
+
+Stateless servers: don't store session data locally → use Redis or database instead.
+
+Horizontal scaling: add more servers behind the load balancer.
+
+Example flow in Django:
+
+Request hits Django view.
+
+View calls internal services or DB.
+
+View builds response → JSON/HTML.
+
+Returns to client.
+
+Step 6: Cache Layer
+
+Caching drastically improves performance and reduces DB load.
+
+Types of cache:
+
+Browser cache → static assets stored on user's device.
+
+CDN cache → images, videos.
+
+Server-side cache → Redis, Memcached.
+
+Example workflow:
+
+        Client → Server → [Check Redis] → If hit → return cached data
+                           ↓
+                      If miss → Fetch from DB → Store in cache → Return
+
+
+Caching patterns:
+
+Cache-aside (lazy loading): only fetch from cache when needed.
+
+Write-through: every write goes through cache.
+
+Write-behind: batch updates to DB.
+
+
+Step 7: Database Layer
+
+Where your data lives permanently.
+
+Two main categories:
+
+Relational DB (SQL)
+
+Examples: PostgreSQL, MySQL
+
+Strong consistency, ACID transactions
+
+Great for structured data like orders, payments, users
+
+NoSQL DB
+
+Key-value → Redis, DynamoDB
+
+Document → MongoDB
+
+Wide-column → Cassandra
+
+Good for scale, high write throughput, flexible schemas
+
+Scaling a database:
+
+Replication: copies for high availability (read replicas).
+
+Sharding: split data horizontally for scaling writes.
+
+Indexes: speed up reads but cost extra writes.
+
+Step 8: Asynchronous Processing
+
+Some tasks shouldn't block user requests.
+
+Examples:
+
+Sending email
+
+Processing video
+
+Generating analytics reports
+
+
+Use message queues (Kafka, RabbitMQ, AWS SQS):
+            App server → Queue → Worker
+
+
+
+
+    Benefits:
+
+        Smooths out traffic spikes
+
+        Decouples services
+
+        Makes system more fault tolerant
+
+Step 9: Response Back to Client
+
+The server sends a response, typically:
+
+    JSON for APIs
+
+    HTML for web pages
+
+
+    Step 10: Monitoring & Logging
+
+You must observe and maintain the system.
+
+Logging: Store every request/response for debugging.
+
+Example tools: ELK Stack (Elasticsearch, Logstash, Kibana)
+
+Metrics: Measure system health.
+
+Example metrics: CPU usage, latency, error rate.
+
+Tools: Prometheus + Grafana, Datadog
+
+Alerting: PagerDuty, Opsgenie
+
+This step is critical for reliability and scaling.
+
+
+######     Example Walkthrough: User clicks "Buy"
+
+Let's apply everything to a real case:
+
+User clicks "Buy" → Browser sends POST /checkout.
+
+DNS resolves myshop.com.
+
+CDN serves static assets instantly (logo, CSS, etc.).
+
+Load balancer routes request to one app server.
+
+Django app:
+
+Validates JWT token.
+
+Checks product availability (via cache → DB fallback).
+
+Places order in database (transaction).
+
+Publishes "Send email" event to Kafka.
+
+Worker service sends confirmation email asynchronously.
+
+Response → JSON { "orderId": 12345, "status": "confirmed" }.
+
+Browser updates UI instantly.
+
+Analytics service logs "order placed".
