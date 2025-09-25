@@ -1,0 +1,49 @@
+WHAT Redux Is
+At its core, Redux is:
+A predictable state container for JavaScript apps.
+Think of it like this:
+Store → A big box holding all your app's state.
+Action → A plain object describing what happened.
+Reducer → A pure function that decides how the state should change.
+Dispatch → A way to send actions to the store.
+Middleware → Helpers for async or logging.
+
+
+
+Component -> Dispatch(action) -> Reducer -> Store updates -> UI re-renders
+
+Scenario: User clicks a button to increment a counter.
+Component: Button click → dispatch({ type: 'INCREMENT' })
+Reducer: Sees INCREMENT → Returns { count: count + 1 }
+Store: Holds the new { count: 1 }
+UI: Automatically re-renders with new count.
+
+
+
+6. When NOT to Use Redux
+Redux isn't always needed.
+Use Redux only when:
+Your app state is complex or shared across many components.
+Debugging state changes is important.
+You need predictable state for a team working on a large project.
+If your app is small → React's useState and useContext are enough.
+
+Redux is a predictable state container for JavaScript apps. 
+It centralizes state in a single store, uses actions to describe 
+state changes, and reducers to handle how state updates.
+
+Redux solves problems of prop drilling, scattered state, and 
+debugging by providing a single source of truth and predictable 
+state changes through actions and reducers.
+
+
+
+
+Why Middleware Exists
+Redux itself is pure — reducers must be pure functions (no API calls, no async operations, no logging).
+But in real-world apps, we need:
+API calls (async)
+Logging
+Authentication checks
+Analytics
+Middleware solves this problem by giving us a place to handle impure code while keeping reducers clean.

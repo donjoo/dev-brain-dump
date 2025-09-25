@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { bugAdded, bugRemoved, bugResolved } from "./app/actions";
+import store from "./app/store";
+import { useState } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+
+
+
+
+export default function App() {
+
+
+  const [text, setText] = useState([]);
+
+const print =() => {
+  setText([store.getState()])
+}
+
+store.subscribe(() =>{
+  console.log("Store changed!", store.getState());
+  print();
+})
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <div>
+      <p>{JSON.stringify(text,null,8)}</p>
+    </div>
+    <button onClick={() => store.dispatch(bugAdded(`bug${Math.random()}`))}>Add Bug</button>
+    <button onClick={() => store.dispatch(bugResolved(1))}>Resolve Bug</button>
+    <button onClick={() => store.dispatch(bugRemoved(1))}>Remove Bug</button>
     </>
   )
-}
 
-export default App
+}
