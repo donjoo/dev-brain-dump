@@ -71,19 +71,17 @@ Rule:
 
 BCNF — Boyce–Codd Normal Form
 
-Boyce–Codd Normal Form (BCNF) is like a stronger version of 3NF — it fixes some rare cases where a table is in 3NF but still has anomalies because of certain functional dependencies.
+Boyce–Codd Normal Form (BCNF) is like a stronger version of 3NF — it fixes some rare cases 
+where a table is in 3NF but still has anomalies because of certain functional dependencies.
+
 Definition
-
     A table is in BCNF if:
-
         It is already in 3NF.
-
         For every functional dependency X → Y, X must be a superkey (i.e., uniquely identify a row).
 
 Key Difference from 3NF
-
-    3NF allows a situation where a non-prime attribute (not part of a key) depends on a candidate key but the determinant is not a superkey.
-
+    3NF allows a situation where a non-prime attribute (not part of a key) depends on a candidate key 
+    but the determinant is not a superkey.
     BCNF removes that loophole — the left-hand side of every functional dependency must be a superkey.
 
 
@@ -124,7 +122,8 @@ Key Idea
 
     Sometimes, information in a table can be reconstructed by joining multiple smaller tables.
 
-    If you can split a table into smaller tables and still get the same data back by joining them, without introducing spurious (fake) rows, then the original table may not be in 5NF.
+    If you can split a table into smaller tables and still get the same data back by joining them, without 
+    introducing spurious (fake) rows, then the original table may not be in 5NF.
 
     5NF ensures that every join dependency is a result of candidate keys — no extra hidden dependencies.
 

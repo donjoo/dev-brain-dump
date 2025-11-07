@@ -1,6 +1,7 @@
 1. What is DDL?    
             (structure)
-    DDL (Data Definition Language) is a subset of SQL used to define, modify, or remove database structures such as tables, indexes, and schemas.
+    DDL (Data Definition Language) is a subset of SQL used to define, modify, or remove 
+    database structures such as tables, indexes, and schemas.
 
     DDL commands affect the database schema, not the data itself.
 
@@ -28,7 +29,8 @@
 
     TRUNCATE → Deletes all data but keeps table structure intact.
 
-    DDL changes cannot be rolled back in most systems unless inside a transaction (some databases like PostgreSQL support transactional DDL).
+    DDL changes cannot be rolled back in most systems unless inside a 
+    transaction (some databases like PostgreSQL support transactional DDL).
 
 
 
@@ -39,7 +41,8 @@
 
 1. What is DML?
 
-    DML is a subset of SQL used to manipulate data inside existing database objects (usually tables).
+    DML is a subset of SQL used to manipulate data inside existing database 
+    objects (usually tables).
 
     Unlike DDL, DML changes data, not structure.
 

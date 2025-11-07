@@ -137,7 +137,8 @@ Hierarchy of Keys in RDBMS
 1. Indexes
 
     Definition:
-    An index is a data structure (often a B-Tree or Hash) that helps the database find rows faster without scanning the entire table.
+    An index is a data structure (often a B-Tree or Hash) that helps 
+    the database find rows faster without scanning the entire table.
 
     Why Use?
 

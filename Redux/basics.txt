@@ -47,3 +47,15 @@ Logging
 Authentication checks
 Analytics
 Middleware solves this problem by giving us a place to handle impure code while keeping reducers clean.
+
+
+
+
+
+| Rule                            | Why it Matters                 |
+| ------------------------------- | ------------------------------ |
+| Pure functions only             | Predictable behavior           |
+| No state mutations              | Enables time-travel debugging  |
+| No async logic inside reducer   | Keep it predictable & testable |
+| Always return valid state       | Prevents crashes               |
+| No random values inside reducer | Keeps output consistent        |

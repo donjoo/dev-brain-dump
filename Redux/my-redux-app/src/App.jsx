@@ -1,34 +1,43 @@
-import { bugAdded, bugRemoved, bugResolved } from "./app/actions";
-import store from "./app/store";
-import { useState } from "react";
+import React from 'react';
+import { Provider } from 'react-redux';
+import store from './app/store';
+import UserProfile from './components/UserProfile';
+import TodoList from './components/TodoList';
+import Counter from './components/Counter';
+import ReduxDevTools from './components/ReduxDevTools';
+import './App.css';
 
-
-
-
-
-export default function App() {
-
-
-  const [text, setText] = useState([]);
-
-const print =() => {
-  setText([store.getState()])
-}
-
-store.subscribe(() =>{
-  console.log("Store changed!", store.getState());
-  print();
-})
-
+function App() {
   return (
-    <>
-    <div>
-      <p>{JSON.stringify(text,null,8)}</p>
-    </div>
-    <button onClick={() => store.dispatch(bugAdded(`bug${Math.random()}`))}>Add Bug</button>
-    <button onClick={() => store.dispatch(bugResolved(1))}>Resolve Bug</button>
-    <button onClick={() => store.dispatch(bugRemoved(1))}>Remove Bug</button>
-    </>
-  )
-
+    <Provider store={store}>
+      <div className="App">
+        <header style={{ 
+          backgroundColor: '#282c34', 
+          padding: '20px', 
+          color: 'white', 
+          textAlign: 'center' 
+        }}>
+          <h1>Redux Learning App</h1>
+          <p>Multiple State Management: User, Todos, and Counter</p>
+        </header>
+        
+        <main style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', 
+          gap: '20px', 
+          padding: '20px',
+          maxWidth: '1200px',
+          margin: '0 auto'
+        }}>
+          <UserProfile />
+          <TodoList />
+          <Counter />
+        </main>
+        
+        <ReduxDevTools />
+      </div>
+    </Provider>
+  );
 }
+
+export default App;
