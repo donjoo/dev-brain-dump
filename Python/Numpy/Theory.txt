@@ -1,0 +1,9 @@
+NumPy (Numerical Python) is a Python library that provides:
+
+Fast, efficient arrays (multi-dimensional) called ndarray.
+
+Vectorized operations so you can do math on whole arrays without Python for-loops.
+
+Tools for linear algebra, random numbers, and more.
+
+Think of NumPy as a high-performance replacement for Python lists when you need to work with numbers and matrices.
