@@ -167,3 +167,75 @@ Once training is done:
 Model weights are frozen
 Inference must not modify the model
 If it does → data leakage + chaos 🚨
+
+One-line memory hook
+Training teaches. Inference answers.
+
+
+
+🔹 Underfitting
+What is underfitting?
+Model is too simple and fails to learn the patterns in the data.
+
+How to fix UNDERFITTING
+
+✅ Add better features
+✅ Use more powerful model
+✅ Train longer
+✅ Reduce regularization
+
+
+
+
+🔹 Overfitting
+What is overfitting?
+Model learns training data too well — including noise — and fails on new data.
+How to fix OVERFITTING (very practical)
+
+✅ More data
+✅ Feature selection
+✅ Regularization
+✅ Early stopping
+✅ Simpler 
+
+One-line memory hook
+Underfitting = didn’t learn enough
+Overfitting = learned too much (including junk)
+
+
+
+
+
+what are Bias and Variance?
+🔹 Bias
+Error due to overly simple assumptions in the model.
+Bias says:
+“The world is simple. I’ll ignore details.”
+
+🔹 Variance
+Error due to model being too sensitive to training data.
+Variance says:
+“Every small detail matters. I’ll memorize everything.”
+
+
+
+
+
+
+
+Why do we split data at all?
+Because ML’s real job is:
+Perform well on unseen data
+
+The three splits
+1️⃣ Training Set
+Purpose:
+👉 Teach the model.
+2️⃣ Validation Set
+Purpose:
+👉 Tune decisions.
+3️⃣ Test Set
+Purpose:
+👉 Final exam.
+
+
