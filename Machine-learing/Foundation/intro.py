@@ -417,3 +417,56 @@ Encode using future info
 
 
 
+
+
+
+
+
+
+
+
+
+
+Linear Regression vs Logistic Regression
+
+Very important distinction:
+
+| Linear            | Logistic             |
+| ----------------- | -------------------- |
+| Predicts number   | Predicts probability |
+| Regression        | Classification       |
+| Output: any value | Output: 0–1          |
+
+
+
+
+What is Linear Regression?
+
+Linear Regression predicts a number by learning a straight-line relationship between features and the output.
+
+Linear Regression learns how much each feature contributes to a number.
+
+
+
+
+
+Logistic Regression
+What problem does it solve?
+Logistic Regression predicts the probability of a class (usually 0 or 1).
+
+
+What Logistic Regression actually learns
+
+Each weight answers:
+
+“How much does this feature increase/decrease the odds of class 1?”
+
+Positive weight → pushes towards class 1
+Negative weight → pushes towards class 0
+
+
+MSE (Mean Squared Error)
+MSE (Mean Squared Error) measures how far your model’s predictions are from the actual values, on average.
+It answers:
+“How wrong is my model?”
+
